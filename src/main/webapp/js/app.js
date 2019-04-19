@@ -1,6 +1,8 @@
 /**
  * app.js file to help setup the event listeners for the page. Will also
  * be responsible for navigating pages. 
+ * 
+ * @author Jose Rivera
  */
 
 // Constant Variables
@@ -27,3 +29,8 @@ window.onload() {
  * Function that triggers when the home label is clicked. Will reset all dynamic variables
  * to default values.
  */
+
+function loadHome() {
+    APP_VIEW = '';
+    DYNAMIC_CSS = '';
+}
