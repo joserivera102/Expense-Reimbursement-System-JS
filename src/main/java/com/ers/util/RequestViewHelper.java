@@ -39,7 +39,7 @@ public class RequestViewHelper {
 			return "partials/contact-us.html";
 
 		default:
-			LOG.error("In RequestViewHelper.process():: uri was " + uri);
+			LOG.warn("In RequestViewHelper.process():: uri was " + uri);
 			return null;
 		}
 	}
