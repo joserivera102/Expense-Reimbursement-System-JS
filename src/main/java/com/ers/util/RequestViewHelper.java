@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
  */
 public class RequestViewHelper {
 
+	private static final String FILEPATH = "/ExpenseReimbursementSystemJS/";
+
 	static final Logger LOG = Logger.getLogger(RequestViewHelper.class);
 
 	/**
@@ -24,16 +26,16 @@ public class RequestViewHelper {
 
 		switch (uri) {
 
-		case "login.view":
+		case FILEPATH + "login.view":
 			return "partials/login.html";
 
-		case "register.view":
+		case FILEPATH + "register.view":
 			return "partials/register.html";
 
-		case "dashboard.view":
+		case FILEPATH + "dashboard.view":
 			return "partials/dashboard.html";
 
-		case "contact-us.view":
+		case FILEPATH + "contact-us.view":
 			return "partials/contact-us.html";
 
 		default:

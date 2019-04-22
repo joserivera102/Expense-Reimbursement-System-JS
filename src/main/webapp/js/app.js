@@ -41,6 +41,8 @@ function loadHome() {
  */
 async function loadLogin() {
 
+    console.log('in loadLogin()');
+
     APP_VIEW.innerHTML = await fetchView('login.view');
     DYNAMIC_CSS.href = 'css/login.css';
     changeScript('js/login.js');
@@ -89,18 +91,18 @@ function logout() {
 function changeScript(src) {
 
     // Check the script tag
-    if (document.getElementsByTagName('body')[0].lastChild == dynamicJs) {
+    if (document.getElementsByTagName('body')[0].lastChild == dynamicJS) {
 
         // Remove the previous script tag
-        document.getElementsByTagName('body')[0].removeChild(dynamicJs);
+        document.getElementsByTagName('body')[0].removeChild(dynamicJS);
     }
 
     // Create a new script tag
-    dynamicJs = document.createElement('script');
-    dynamicJs.src = src;
+    dynamicJS = document.createElement('script');
+    dynamicJS.src = src;
 
     // Append the new script element
-    document.getElementsByTagName('body')[0].appendChild(dynamicJs);
+    document.getElementsByTagName('body')[0].appendChild(dynamicJS);
 }
 
 /**
