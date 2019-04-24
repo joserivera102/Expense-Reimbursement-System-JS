@@ -21,7 +21,7 @@ import oracle.jdbc.driver.OracleDriver;
  */
 public class ConnectionFactory {
 
-	static final Logger LOG = Logger.getLogger(ConnectionFactory.class);
+	private static final Logger LOG = Logger.getLogger(ConnectionFactory.class);
 
 	private static ConnectionFactory connectionFactory = new ConnectionFactory();
 
