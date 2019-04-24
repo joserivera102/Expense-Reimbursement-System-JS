@@ -63,15 +63,25 @@ function fieldsValid() {
 
     /*
         Taken from StackOverflow user 'Jason McCreary' ( 04/24/2019 ), regular expression 
-        used for simple username validation. 
+        used for simple username validation.
+        - the input username should only contains alphanumeric characters
+        - Cannot be longer than 12 characters
     */
     let usernameRegex = /^[a-zA-Z0-9]+$/;
-    if (usernameRegex.test(fieldsArr[3]) == false)
+    let usernameLength = 12;
+    if (usernameRegex.test(fieldsArr[3]) == false || fieldsArr[3].length > usernameLength)
         return false;
+
+    // TODO add check for unique username
 
     /*
         Taken from StackOverflow user 'Minko Gechev' ( 04/24/2019 ), regular expression 
-        used for simple password validation. 
+        used for simple password validation.
+        - Contain at least 8 characters
+        - Contain at least 1 number
+        - Contain at least 1 lowercase character (a-z)
+        - Contain at least 1 uppercase character (A-Z)
+        - Contains only 0-9a-zA-Z
     */
     let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
     if (passwordRegex.test(fieldsArr[4]) == false)
