@@ -64,7 +64,9 @@ public class ConnectionFactory {
 			DriverManager.registerDriver(new OracleDriver());
 
 			// Load the properties file ( keys and values) into the properties object
-			prop.load(new FileReader("src/main/resources/application.properties"));
+			// Requires full file path, needs to be looked into later...
+			prop.load(new FileReader(
+					"D:\\Repositories\\Expense-Reimbursement-System-JS\\src\\main\\resources\\application.properties"));
 
 			// Get a connection from the DriverManager class
 			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("usr"),

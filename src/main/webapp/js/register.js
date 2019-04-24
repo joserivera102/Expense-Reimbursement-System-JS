@@ -24,9 +24,47 @@ async function registerUser() {
 
     console.log('in registerUser()');
 
+    // Gather all the fields into an array
+    let fieldsArr = new Array();
+    fieldsArr[0] = document.getElementById('register-fn').value;
+    fieldsArr[1] = document.getElementById('register-ln').value;
+    fieldsArr[2] = document.getElementById('register-email').value;
+    fieldsArr[3] = document.getElementById('register-username').value;
+    fieldsArr[4] = document.getElementById('register-password').value;
+
     // Validate the fields
-    if (fieldsValid()) {
-        // TODO
+    if (fieldsValid(fieldsArr)) {
+
+        // Create a user using the fields
+        let user = {
+            id: 0,
+            firstName: fieldsArr[0],
+            lastName: fieldsArr[1],
+            email: fieldsArr[2],
+            username: fieldsArr[3],
+            password: fieldsArr[4],
+            roleId: 1
+        };
+
+        console.log(user);
+
+        // Perform our POST request
+        let request = await fetch('add', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
+
+        // Check our status
+        if (request.status == 200) {
+
+            let response = await request.json();
+
+            console.log(response);
+        }
     } else {
         // TODO
     }
@@ -37,15 +75,7 @@ async function registerUser() {
  * register form. Will check if they are not empty, and they
  * follow proper form.
  */
-function fieldsValid() {
-
-    // Gather all the fields into an array
-    let fieldsArr = new Array();
-    fieldsArr[0] = document.getElementById('register-fn').value;
-    fieldsArr[1] = document.getElementById('register-ln').value;
-    fieldsArr[2] = document.getElementById('register-email').value;
-    fieldsArr[3] = document.getElementById('register-username').value;
-    fieldsArr[4] = document.getElementById('register-password').value;
+function fieldsValid(fieldsArr) {
 
     // Loop through and validate for empty values
     for (let i = 0; i < fieldsArr.length; i++) {
