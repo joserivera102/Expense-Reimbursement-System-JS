@@ -27,7 +27,7 @@ public class ViewServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -786582522394880612L;
 
-	static final Logger LOG = Logger.getLogger(ViewServlet.class);
+	private static final Logger LOG = Logger.getLogger(ViewServlet.class);
 
 	/**
 	 * GET method to change the view on the front end. This servlet will handle all
