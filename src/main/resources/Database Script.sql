@@ -50,6 +50,12 @@ DROP
 	TABLE
 		ers_reimbursement;
 
+DROP
+	SEQUENCE ers_users_pk_sequence;
+
+DROP
+	SEQUENCE ers_reimbursement_pk_sequence;
+
 CREATE
 	TABLE
 		ers_reimbursement_status ( reimb_status_id NUMBER NOT NULL,
@@ -99,6 +105,42 @@ CREATE
 		CONSTRAINT ers_users_fk_reslvr FOREIGN KEY (reimb_resolver) REFERENCES ers_users (ers_users_id),
 		CONSTRAINT ers_reimbursement_status_fk FOREIGN KEY (reimb_status_id) REFERENCES ers_reimbursement_status (reimb_status_id),
 		CONSTRAINT ers_reimbursement_type_fk FOREIGN KEY (reimb_type_id) REFERENCES ers_reimbursement_type (reimb_type_id) );
+
+CREATE
+	SEQUENCE ers_users_pk_sequence MINVALUE 1 MAXVALUE 9999999 INCREMENT BY 1
+START WITH
+	1;
+
+CREATE
+	SEQUENCE ers_reimbursement_pk_sequence MINVALUE 1 MAXVALUE 9999999 INCREMENT BY 1
+START WITH
+	1;
+
+CREATE
+OR REPLACE
+TRIGGER ers_users_pk_trigger BEFORE INSERT
+	ON
+	ers_users FOR EACH ROW
+BEGIN
+	SELECT
+		ers_users_pk_sequence.NEXTVAL INTO
+			:new.ers_users_id
+		FROM
+			dual;
+END;
+
+CREATE
+OR REPLACE
+TRIGGER ers_reimbursement_pk_trigger BEFORE INSERT
+	ON
+	ers_reimbursement FOR EACH ROW
+BEGIN
+	SELECT
+		ers_reimbursement_pk_sequence.NEXTVAL INTO
+			:new.reimb_Id
+		FROM
+			dual;
+END;
 
 INSERT
 	INTO
@@ -164,30 +206,5 @@ INSERT
 	'Rivera',
 	'jose@yahoo.com',
 	2 );
-
-INSERT
-	INTO
-		ers_users
-	VALUES ( -1,
-	'no resolver',
-	'no resolver',
-	'no resolver',
-	'no resolver',
-	'notresolved@goodluck.com',
-	2 );
-
-INSERT
-	INTO
-		ers_reimbursement
-	VALUES ( 0,
-	100,
-	'09-MAR-19 02.17.24.628000000 PM',
-	NULL,
-	'default',
-	NULL,
-	0,
-	NULL,
-	1,
-	1 );
 
 COMMIT;
