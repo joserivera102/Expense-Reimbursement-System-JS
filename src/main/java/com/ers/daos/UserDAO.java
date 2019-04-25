@@ -60,7 +60,7 @@ public class UserDAO implements DAO<User> {
 			statement.setString(3, user.getFirstName());
 			statement.setString(4, user.getLastName());
 			statement.setString(5, user.getEmail());
-			statement.setInt(6, user.getRoleId());
+			statement.setInt(6, user.getRole().getId());
 
 			int rowsInserted = statement.executeUpdate();
 

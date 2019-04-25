@@ -1,5 +1,8 @@
 package com.ers.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * User class to detail all information for a user.
  * 
@@ -14,7 +17,8 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private int roleId;
+	private UserRole role;
+	private List<Reimbursement> reimbursements;
 
 	/**
 	 * No Args Constructor
@@ -33,9 +37,10 @@ public class User {
 	 * @param firstName: The user's first name.
 	 * @param lastName: The user's last name.
 	 * @param email: The user's email address.
-	 * @param roleId: An id to link to a role.
+	 * @param role: A user role.
 	 */
-	public User(int id, String username, String password, String firstName, String lastName, String email, int roleId) {
+	public User(int id, String username, String password, String firstName, String lastName, String email,
+			UserRole role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -43,7 +48,8 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.roleId = roleId;
+		this.role = role;
+		this.reimbursements = new ArrayList<>();
 	}
 
 	public int getId() {
@@ -94,12 +100,12 @@ public class User {
 		this.email = email;
 	}
 
-	public int getRoleId() {
-		return roleId;
+	public UserRole getRole() {
+		return role;
 	}
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 
 	@Override
@@ -111,7 +117,8 @@ public class User {
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + roleId;
+		result = prime * result + ((reimbursements == null) ? 0 : reimbursements.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -147,7 +154,15 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (roleId != other.roleId)
+		if (reimbursements == null) {
+			if (other.reimbursements != null)
+				return false;
+		} else if (!reimbursements.equals(other.reimbursements))
+			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -160,6 +175,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", roleId=" + roleId + "]";
+				+ ", lastName=" + lastName + ", email=" + email + ", role=" + role + ", reimbursements="
+				+ reimbursements + "]";
 	}
 }

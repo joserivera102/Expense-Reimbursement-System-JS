@@ -201,7 +201,7 @@ INSERT
 		ers_users
 	VALUES ( 0,
 	'jrivera',
-	'$2a$10$DjAc0WO5SBJq9mDPKiT2s.HM/IfSS04DI7QbEpVWeZ2W/nLmx7KWm',
+	'Password1',
 	'Jose',
 	'Rivera',
 	'jose@yahoo.com',
