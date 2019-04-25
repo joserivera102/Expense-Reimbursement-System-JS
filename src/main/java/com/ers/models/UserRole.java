@@ -10,6 +10,12 @@ public class UserRole {
 
 	private int id;
 	private String role;
+	
+	public UserRole(int id, String role) {
+		super();
+		this.id = id;
+		this.role = role;
+	}
 
 	public int getId() {
 		return id;

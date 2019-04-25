@@ -1,8 +1,5 @@
 package com.ers.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * User class to detail all information for a user.
  * 
@@ -18,7 +15,6 @@ public class User {
 	private String lastName;
 	private String email;
 	private UserRole role;
-	private List<Reimbursement> reimbursements;
 
 	/**
 	 * No Args Constructor
@@ -49,7 +45,6 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.role = role;
-		this.reimbursements = new ArrayList<>();
 	}
 
 	public int getId() {
@@ -117,7 +112,6 @@ public class User {
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((reimbursements == null) ? 0 : reimbursements.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -154,11 +148,6 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (reimbursements == null) {
-			if (other.reimbursements != null)
-				return false;
-		} else if (!reimbursements.equals(other.reimbursements))
-			return false;
 		if (role == null) {
 			if (other.role != null)
 				return false;
@@ -175,7 +164,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", role=" + role + ", reimbursements="
-				+ reimbursements + "]";
+				+ ", lastName=" + lastName + ", email=" + email + ", role=" + role + "]";
 	}
 }
