@@ -45,7 +45,7 @@ public class UserDAO implements DAO<User> {
 			connection.setAutoCommit(false);
 
 			// Create our sequel statement
-			String sql = "INSERT INTO ers_users VALUES (0, ?, ?, ?, ?, ?, ?";
+			String sql = "INSERT INTO ers_users VALUES (0, ?, ?, ?, ?, ?, ?)";
 
 			// Get primary key
 			String[] keys = new String[1];
