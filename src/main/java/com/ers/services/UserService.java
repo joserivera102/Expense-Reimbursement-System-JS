@@ -23,6 +23,16 @@ public class UserService {
 		return null;
 	}
 
+	public User getByCredentials(String username, String password) {
+
+		if (username == null || password == null) {
+			LOG.warn("In UserService.getByCredentials()::User credentials invalid");
+			return null;
+		}
+
+		return userDao.getByCredentials(username, password);
+	}
+
 	public User getById(int id) {
 		return null;
 	}

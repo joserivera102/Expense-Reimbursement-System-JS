@@ -70,6 +70,10 @@ async function registerUser() {
             let response = await request.json();
 
             console.log(response);
+
+            // TODO
+        } else {
+            // TODO
         }
     } else {
         // TODO
