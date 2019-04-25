@@ -35,6 +35,12 @@ async function registerUser() {
     // Validate the fields
     if (fieldsValid(fieldsArr)) {
 
+        // Create a role for the user (all users registering will be employees)
+        let role = {
+            id: 1,
+            role: 'EMPLOYEE'
+        };
+
         // Create a user using the fields
         let user = {
             id: 0,
@@ -43,7 +49,7 @@ async function registerUser() {
             email: fieldsArr[2],
             username: fieldsArr[3],
             password: fieldsArr[4],
-            roleId: 1
+            role: role
         };
 
         console.log(user);
