@@ -1,4 +1,8 @@
 console.log('login.js loaded');
+
+// Constant Variables
+const SUCCESS_ALERT_CLASS = "alert alert-success text-center";
+const DANGER_ALERT_CLASS = "alert alert-danger text-center";
 configureLogin();
 
 /**
@@ -43,10 +47,20 @@ async function loginUser() {
 
             console.log(response);
 
-            // TODO
+            // Display login success message
+            document.getElementById('login-alert-msg').setAttribute('class', SUCCESS_ALERT_CLASS);
+            document.getElementById('login-alert-msg').innerHTML = 'Login Successful!';
+            document.getElementById('login-alert-msg').hidden = false;
+
+            // Navigate to dashboard, calling loadDashboard() from app.js
+            loadDashboard();
 
         } else {
-            // TODO
+
+            // Display login failure message
+            document.getElementById('login-alert-msg').setAttribute('class', DANGER_ALERT_CLASS);
+            document.getElementById('login-alert-msg').innerHTML = 'Login Failed!';
+            document.getElementById('login-alert-msg').hidden = false;
         }
     } else {
         // TODO
