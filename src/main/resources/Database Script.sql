@@ -95,7 +95,6 @@ CREATE
 		reimb_submitted TIMESTAMP NOT NULL,
 		reimb_resolved TIMESTAMP,
 		reimb_description VARCHAR2(250),
-		reimb_receipt BLOB,
 		reimb_author NUMBER NOT NULL,
 		reimb_resolver NUMBER,
 		reimb_status_id NUMBER NOT NULL,
@@ -200,8 +199,19 @@ INSERT
 	INTO
 		ers_users
 	VALUES ( 0,
+	'resolver',
+	'resolver',
+	'resolver',
+	'resolver',
+	'resolver@resolver.com',
+	2 );
+
+INSERT
+	INTO
+		ers_users
+	VALUES ( 0,
 	'jrivera',
-	'Password1',
+	'Ersadmin1',
 	'Jose',
 	'Rivera',
 	'jose@yahoo.com',

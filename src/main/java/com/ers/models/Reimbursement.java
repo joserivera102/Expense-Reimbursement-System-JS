@@ -16,7 +16,6 @@ public class Reimbursement {
 	private Timestamp dateSubmitted;
 	private Timestamp dateResolved;
 	private String description;
-	private Blob receiptImg;
 	private int authorId;
 	private int resolverId;
 	private int statusId;
@@ -37,21 +36,19 @@ public class Reimbursement {
 	 * @param dateSubmitted: The date that the Reimbursement was submitted.
 	 * @param dateResolved: The date that the Reimbursement was resolved.
 	 * @param description: A description of the Reimbursement.
-	 * @param receiptImg: An image of the reimbursement receipt.
 	 * @param authorId: The author id.
 	 * @param resolverId: The resolver id.
 	 * @param statusId: A status id.
 	 * @param typeId: The type id.
 	 */
 	public Reimbursement(int id, double amount, Timestamp dateSubmitted, Timestamp dateResolved, String description,
-			Blob receiptImg, int authorId, int resolverId, int statusId, int typeId) {
+			int authorId, int resolverId, int statusId, int typeId) {
 		super();
 		this.id = id;
 		this.amount = amount;
 		this.dateSubmitted = dateSubmitted;
 		this.dateResolved = dateResolved;
 		this.description = description;
-		this.receiptImg = receiptImg;
 		this.authorId = authorId;
 		this.resolverId = resolverId;
 		this.statusId = statusId;
@@ -98,14 +95,6 @@ public class Reimbursement {
 		this.description = description;
 	}
 
-	public Blob getReceiptImg() {
-		return receiptImg;
-	}
-
-	public void setReceiptImg(Blob receiptImg) {
-		this.receiptImg = receiptImg;
-	}
-
 	public int getAuthorId() {
 		return authorId;
 	}
@@ -150,7 +139,6 @@ public class Reimbursement {
 		result = prime * result + ((dateSubmitted == null) ? 0 : dateSubmitted.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((receiptImg == null) ? 0 : receiptImg.hashCode());
 		result = prime * result + resolverId;
 		result = prime * result + statusId;
 		result = prime * result + typeId;
@@ -187,11 +175,6 @@ public class Reimbursement {
 			return false;
 		if (id != other.id)
 			return false;
-		if (receiptImg == null) {
-			if (other.receiptImg != null)
-				return false;
-		} else if (!receiptImg.equals(other.receiptImg))
-			return false;
 		if (resolverId != other.resolverId)
 			return false;
 		if (statusId != other.statusId)
@@ -204,7 +187,7 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [id=" + id + ", amount=" + amount + ", dateSubmitted=" + dateSubmitted + ", dateResolved="
-				+ dateResolved + ", description=" + description + ", receiptImg=" + receiptImg + ", authorId="
-				+ authorId + ", resolverId=" + resolverId + ", statusId=" + statusId + ", typeId=" + typeId + "]";
+				+ dateResolved + ", description=" + description + ", authorId=" + authorId + ", resolverId="
+				+ resolverId + ", statusId=" + statusId + ", typeId=" + typeId + "]";
 	}
 }
