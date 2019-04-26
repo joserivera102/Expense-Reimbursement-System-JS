@@ -9,7 +9,7 @@ function configureRegister() {
     console.log('in configureRegister()');
 
     // Hide the alert message on startup
-    document.getElementById('register-alert-msg').hidden = true;
+    alertMessage('', '', true);
 
     // Configure the button
     document.getElementById('register-account-btn').addEventListener('click', registerUser);
@@ -71,12 +71,18 @@ async function registerUser() {
 
             console.log(response);
 
-            // TODO
+            // Display the alert message
+            alertMessage(SUCCESS_ALERT_CLASS, 'Registration Successful!', false);
+
         } else {
-            // TODO
+
+            // Display the alert message
+            alertMessage(DANGER_ALERT_CLASS, 'Registration Failure!', false);
         }
     } else {
-        // TODO
+
+        // Display the alert message
+        alertMessage(SUCCESS_ALERT_CLASS, 'Invalid Fields!', false);
     }
 }
 
@@ -128,4 +134,18 @@ function fieldsValid(fieldsArr) {
         return false;
 
     return true;
+}
+
+/**
+ * Function that displays the alert and configures it appropriately.
+ * 
+ * @param {String} type Class attribute from bootstrap, either alert-danger or alert-success.
+ * @param {String} message The message the alert displays.
+ * @param {boolean} hidden boolean whether the message is hidden.
+ */
+function alertMessage(type, message, hidden) {
+
+    document.getElementById('register-alert-msg').hidden = hidden;
+    document.getElementById('register-alert-msg').setAttribute('class', type);
+    document.getElementById('register-alert-msg').innerHTML = message;
 }

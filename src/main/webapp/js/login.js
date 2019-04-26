@@ -14,7 +14,7 @@ function configureLogin() {
     console.log('in configureLogin()');
 
     // Hide the alert message
-    document.getElementById('login-alert-msg').hidden = true;
+    alertMessage('', '', true);
 
     // Add event listener to button
     document.getElementById('submit-creds').addEventListener('click', loginUser);
@@ -44,10 +44,8 @@ async function loginUser() {
 
         if (request.status == 200) {
 
-            // Display login success message
-            document.getElementById('login-alert-msg').setAttribute('class', SUCCESS_ALERT_CLASS);
-            document.getElementById('login-alert-msg').innerHTML = 'Login Successful!';
-            document.getElementById('login-alert-msg').hidden = false;
+            // Display the alert message
+            alertMessage(SUCCESS_ALERT_CLASS, 'Login Successful!', false);
 
             let response = await request.json();
 
@@ -58,17 +56,13 @@ async function loginUser() {
 
         } else {
 
-            // Display login failure message
-            document.getElementById('login-alert-msg').setAttribute('class', DANGER_ALERT_CLASS);
-            document.getElementById('login-alert-msg').innerHTML = 'Login Failed!';
-            document.getElementById('login-alert-msg').hidden = false;
+            // Display the alert message
+            alertMessage(DANGER_ALERT_CLASS, 'Login Failed!', false);
         }
     } else {
 
-        // Display login failure message
-        document.getElementById('login-alert-msg').setAttribute('class', DANGER_ALERT_CLASS);
-        document.getElementById('login-alert-msg').innerHTML = 'Please enter proper field values!';
-        document.getElementById('login-alert-msg').hidden = false;
+        // Display the alert message
+        alertMessage(DANGER_ALERT_CLASS, 'Invalid Fields!', false);
     }
 }
 
@@ -88,4 +82,18 @@ function fieldsValid(fieldsArr) {
     }
 
     return true;
+}
+
+/**
+ * Function that displays the alert and configures it appropriately.
+ * 
+ * @param {String} type Class attribute from bootstrap, either alert-danger or alert-success.
+ * @param {String} message The message the alert displays.
+ * @param {boolean} hidden boolean whether the message is hidden.
+ */
+function alertMessage(type, message, hidden) {
+
+    document.getElementById('login-alert-msg').hidden = hidden;
+    document.getElementById('login-alert-msg').setAttribute('class', type);
+    document.getElementById('login-alert-msg').innerHTML = message;
 }

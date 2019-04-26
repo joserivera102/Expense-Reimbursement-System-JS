@@ -17,8 +17,7 @@ function configureDashboard() {
     document.getElementById('update-form').hidden = true;
 
     // Hide the alert message
-    document.getElementById('dashboard-alert-msg').hidden = true;
-    document.getElementById('dashboard-alert-msg').innerHTML = '';
+    alertMessage('', '', true);
 
     // Add event listeners to buttons
     document.getElementById('create-new-request-btn').addEventListener('click', function() {
@@ -97,28 +96,25 @@ async function submitRequest() {
 
         if (request.status == 200) {
 
-            let response = await request.json();
-
             // Display the alert message
-            document.getElementById('dashboard-alert-msg').hidden = false;
-            document.getElementById('dashboard-alert-msg').setAttribute('class', SUCCESS_ALERT_CLASS);
-            document.getElementById('dashboard-alert-msg').innerHTML = 'Submission Successful!';
+            alertMessage(SUCCESS_ALERT_CLASS, 'Submission Successful!', false);
 
         } else {
+
             // Display the alert message
-            document.getElementById('dashboard-alert-msg').hidden = false;
-            document.getElementById('dashboard-alert-msg').setAttribute('class', DANGER_ALERT_CLASS);
-            document.getElementById('dashboard-alert-msg').innerHTML = 'Could not process request!';
+            alertMessage(DANGER_ALERT_CLASS, 'Unable to process request!', false);
         }
     } else {
 
         // Display the alert message
-        document.getElementById('dashboard-alert-msg').hidden = false;
-        document.getElementById('dashboard-alert-msg').setAttribute('class', DANGER_ALERT_CLASS);
-        document.getElementById('dashboard-alert-msg').innerHTML = 'Invalid Fields!';
+        alertMessage(DANGER_ALERT_CLASS, 'Invalid Fields!', false);
     }
 }
 
+/**
+ * Function to clear the request form and hide any alerts that may
+ * be showing.
+ */
 function clearRequestForm() {
 
     // Clear the values
@@ -126,8 +122,7 @@ function clearRequestForm() {
     document.getElementById('reimbursement-description').value = '';
 
     // Hide the alert message
-    document.getElementById('dashboard-alert-msg').hidden = true;
-    document.getElementById('dashboard-alert-msg').innerHTML = '';
+    alertMessage('', '', true);
 }
 
 /**
@@ -173,4 +168,18 @@ function showForm(name) {
             document.getElementById('update-form').hidden = false;
             break;
     }
+}
+
+/**
+ * Function that displays the alert and configures it appropriately.
+ * 
+ * @param {String} type Class attribute from bootstrap, either alert-danger or alert-success.
+ * @param {String} message The message the alert displays.
+ * @param {boolean} hidden boolean whether the message is hidden.
+ */
+function alertMessage(type, message, hidden) {
+
+    document.getElementById('dashboard-alert-msg').hidden = hidden;
+    document.getElementById('dashboard-alert-msg').setAttribute('class', type);
+    document.getElementById('dashboard-alert-msg').innerHTML = message;
 }
