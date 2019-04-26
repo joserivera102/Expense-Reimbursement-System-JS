@@ -194,7 +194,7 @@ INSERT
 	INTO
 		ers_user_roles
 	VALUES ( 2,
-	'F_MANAGER' );
+	'FINANCE_MANAGER' );
 
 INSERT
 	INTO
