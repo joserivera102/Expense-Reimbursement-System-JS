@@ -199,11 +199,33 @@ INSERT
 	INTO
 		ers_users
 	VALUES ( 0,
+	'resolver',
+	'resolver',
+	'resolver',
+	'resolver',
+	'resolver',
+	2 );
+
+INSERT
+	INTO
+		ers_users
+	VALUES ( 0,
 	'jrivera',
-	'Password1',
+	'Ersadmin1',
 	'Jose',
 	'Rivera',
 	'jose@yahoo.com',
+	2 );
+
+INSERT
+	INTO
+		ers_users
+	VALUES ( 0,
+	'resolver',
+	'Resolver1',
+	'resolver',
+	'resolver',
+	'resolver@resolver.com',
 	2 );
 
 COMMIT;
