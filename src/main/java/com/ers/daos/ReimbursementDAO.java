@@ -56,7 +56,6 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 				reimbursement.setDateSubmitted(resultSet.getTimestamp("reimb_submitted"));
 				reimbursement.setDateResolved(resultSet.getTimestamp("reimb_resolved"));
 				reimbursement.setDescription(resultSet.getString("reimb_description"));
-				reimbursement.setReceiptImg(resultSet.getBlob("reimb_receipt"));
 				reimbursement.setAuthorId(resultSet.getInt("reimb_author"));
 				reimbursement.setResolverId(resultSet.getInt("reimb_resolver"));
 				reimbursement.setStatusId(resultSet.getInt("reimb_status_id"));
@@ -106,7 +105,6 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 				reimbursement.setDateSubmitted(resultSet.getTimestamp("reimb_submitted"));
 				reimbursement.setDateResolved(resultSet.getTimestamp("reimb_resolved"));
 				reimbursement.setDescription(resultSet.getString("reimb_description"));
-				reimbursement.setReceiptImg(resultSet.getBlob("reimb_receipt"));
 				reimbursement.setAuthorId(resultSet.getInt("reimb_author"));
 				reimbursement.setResolverId(resultSet.getInt("reimb_resolver"));
 				reimbursement.setStatusId(resultSet.getInt("reimb_status_id"));
@@ -156,7 +154,6 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 				reimbursement.setDateSubmitted(resultSet.getTimestamp("reimb_submitted"));
 				reimbursement.setDateResolved(resultSet.getTimestamp("reimb_resolved"));
 				reimbursement.setDescription(resultSet.getString("reimb_description"));
-				reimbursement.setReceiptImg(resultSet.getBlob("reimb_receipt"));
 				reimbursement.setAuthorId(resultSet.getInt("reimb_author"));
 				reimbursement.setResolverId(resultSet.getInt("reimb_resolver"));
 				reimbursement.setStatusId(resultSet.getInt("reimb_status_id"));
@@ -202,7 +199,6 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 				reimbursement.setDateSubmitted(resultSet.getTimestamp("reimb_submitted"));
 				reimbursement.setDateResolved(resultSet.getTimestamp("reimb_resolved"));
 				reimbursement.setDescription(resultSet.getString("reimb_description"));
-				reimbursement.setReceiptImg(resultSet.getBlob("reimb_receipt"));
 				reimbursement.setAuthorId(resultSet.getInt("reimb_author"));
 				reimbursement.setResolverId(resultSet.getInt("reimb_resolver"));
 				reimbursement.setStatusId(resultSet.getInt("reimb_status_id"));
@@ -229,7 +225,7 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 			connection.setAutoCommit(false);
 
 			// Create our sequel statement
-			String sql = "INSERT INTO ers_reimbursement VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO ers_reimbursement VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			// Get primary key
 			String[] keys = new String[1];
@@ -244,11 +240,10 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 			statement.setTimestamp(3, reimbursement.getDateSubmitted());
 			statement.setTimestamp(4, reimbursement.getDateResolved());
 			statement.setString(5, reimbursement.getDescription());
-			statement.setBlob(6, reimbursement.getReceiptImg());
-			statement.setInt(7, reimbursement.getAuthorId());
-			statement.setInt(8, reimbursement.getResolverId());
-			statement.setInt(9, reimbursement.getStatusId());
-			statement.setInt(10, reimbursement.getTypeId());
+			statement.setInt(6, reimbursement.getAuthorId());
+			statement.setInt(7, reimbursement.getResolverId());
+			statement.setInt(8, reimbursement.getStatusId());
+			statement.setInt(9, reimbursement.getTypeId());
 
 			int rowsInserted = statement.executeUpdate();
 
@@ -287,8 +282,8 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 
 			// Create our sequel statement
 			String sql = "UPDATE ers_reimbursement SET " + "reimb_amount = ?, " + "reimb_submitted = ?, "
-					+ "reimb_resolved = ?, " + "reimb_description = ?, " + "reimb_receipt = ?, " + "reimb_author = ?, "
-					+ "reimb_resolver = ?, " + "reimb_status_id = ?, " + "reimb_type_id = ? " + "WHERE reimb_id = ?";
+					+ "reimb_resolved = ?, " + "reimb_description = ?, " + "reimb_author = ?, " + "reimb_resolver = ?, "
+					+ "reimb_status_id = ?, " + "reimb_type_id = ? " + "WHERE reimb_id = ?";
 
 			// Create the prepared statement
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -298,12 +293,11 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 			statement.setTimestamp(2, updatedReimbursement.getDateSubmitted());
 			statement.setTimestamp(3, updatedReimbursement.getDateResolved());
 			statement.setString(4, updatedReimbursement.getDescription());
-			statement.setBlob(5, updatedReimbursement.getReceiptImg());
-			statement.setInt(6, updatedReimbursement.getAuthorId());
-			statement.setInt(7, updatedReimbursement.getResolverId());
-			statement.setInt(8, updatedReimbursement.getStatusId());
-			statement.setInt(9, updatedReimbursement.getTypeId());
-			statement.setInt(10, updatedReimbursement.getId());
+			statement.setInt(5, updatedReimbursement.getAuthorId());
+			statement.setInt(6, updatedReimbursement.getResolverId());
+			statement.setInt(7, updatedReimbursement.getStatusId());
+			statement.setInt(8, updatedReimbursement.getTypeId());
+			statement.setInt(9, updatedReimbursement.getId());
 
 			int rowsInserted = statement.executeUpdate();
 

@@ -37,6 +37,104 @@ function configureDashboard() {
     document.getElementById('clear-form-btn').addEventListener('click', clearRequestForm);
 }
 
+async function submitRequest() {
+
+    // Variable for the type id of the reimbursement
+    let type;
+
+    // Get the select input value
+    switch (document.getElementById('reimbursement-type').value) {
+
+        case 'Lodging':
+            type = 1;
+            break;
+
+        case 'Travel':
+            type = 2;
+            break;
+
+        case 'Food':
+            type = 3;
+            break;
+
+        case 'Other':
+            type = 4;
+            break;
+    }
+
+    // Gather the input fields
+    let fieldsArr = [
+        document.getElementById('reimbursement-amount').value,
+        document.getElementById('reimbursement-description').value,
+    ];
+
+    if (fieldsValid(fieldsArr)) {
+
+        // Create a reimbursement
+        let reimbursement = {
+            id: 0,
+            amount: fieldsArr[0],
+            dateSubmitted: Date.now(),
+            dateResolved: null,
+            description: fieldsArr[1],
+            authorId: 1,
+            resolverId: 0,
+            statusId: 1,
+            typeId: type
+        }
+
+        console.log(reimbursement);
+
+        // Perform our POST request
+        let request = await fetch('submit', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reimbursement)
+        });
+
+        if (request.status == 200) {
+
+            let response = await request.json();
+
+            console.log(response);
+
+        } else {
+
+        }
+
+    } else {
+
+        // Display the alert message
+        document.getElementById('dashboard-alert-msg').hidden = false;
+        document.getElementById('dashboard-alert-msg').setAttribute('class', DANGER_ALERT_CLASS);
+        document.getElementById('dashboard-alert-msg').innerHTML = 'Invalid Fields!';
+    }
+}
+
+function clearRequestForm() {
+
+}
+
+/**
+ * Helper function to check if the fields are not empty.
+ * 
+ * @param {String Array} fieldsArr The array of strings to check.
+ * 
+ * @return True if the fields are valid, false if not.
+ */
+function fieldsValid(fieldsArr) {
+
+    for (let i = 0; i < fieldsArr.length; i++) {
+        if (fieldsArr[i] == '')
+            return false;
+    }
+
+    return true;
+}
+
 /**
  * Helper function used to show a requested form when clicked.
  * @param {String} name The name of the form to show ( using id as name ).

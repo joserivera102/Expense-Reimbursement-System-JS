@@ -72,6 +72,13 @@ async function loginUser() {
     }
 }
 
+/**
+ * Helper function to check if the fields are not empty.
+ * 
+ * @param {String Array} fieldsArr The array of strings to check.
+ * 
+ * @return True if the fields are valid, false if not.
+ */
 function fieldsValid(fieldsArr) {
 
     // Loop through and validate for empty values
