@@ -1,6 +1,7 @@
 package com.ers.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,14 +49,35 @@ public class SubmitReimbursementServlet extends HttpServlet {
 			ObjectMapper objectMapper = new ObjectMapper();
 
 			// Read the values for a reimbursement
-			Reimbursement reimbursement = objectMapper.readValue(req.getInputStream(), Reimbursement.class);
+			Reimbursement newReimbursement = objectMapper.readValue(req.getInputStream(), Reimbursement.class);
 
 			// Check our reimbursement
-			if (reimbursement == null) {
+			if (newReimbursement == null) {
 				LOG.warn("In SubmitReimbursementServlet.doPost():: Reimbursement was null");
 				resp.setStatus(400);
 				return;
 			}
+
+			// Send to service to add to database
+			Reimbursement reimbursement = reimbursementService.add(newReimbursement);
+
+			// Check our newly added reimbursement
+			if (reimbursement == null) {
+				LOG.warn("In SubmitReimbursementServlet.doPost():: Newly added reimbursement was null");
+				resp.setStatus(400);
+				return;
+			}
+
+			// Our reimbursement was successfully added
+			resp.setStatus(200);
+
+			// Send our user object back to client
+			PrintWriter printWriter = resp.getWriter();
+			resp.setContentType("application/json");
+
+			// Write our reimbursement back as JSON
+			String reimbursementJson = objectMapper.writeValueAsString(reimbursement);
+			printWriter.write(reimbursementJson);
 
 		} catch (IllegalStateException ise) {
 			LOG.error(ise.getMessage());

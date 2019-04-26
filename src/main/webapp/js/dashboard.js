@@ -78,7 +78,7 @@ async function submitRequest() {
             dateResolved: null,
             description: fieldsArr[1],
             authorId: 1,
-            resolverId: 0,
+            resolverId: 1,
             statusId: 1,
             typeId: type
         }
@@ -99,12 +99,17 @@ async function submitRequest() {
 
             let response = await request.json();
 
-            console.log(response);
+            // Display the alert message
+            document.getElementById('dashboard-alert-msg').hidden = false;
+            document.getElementById('dashboard-alert-msg').setAttribute('class', SUCCESS_ALERT_CLASS);
+            document.getElementById('dashboard-alert-msg').innerHTML = 'Submission Successful!';
 
         } else {
-
+            // Display the alert message
+            document.getElementById('dashboard-alert-msg').hidden = false;
+            document.getElementById('dashboard-alert-msg').setAttribute('class', DANGER_ALERT_CLASS);
+            document.getElementById('dashboard-alert-msg').innerHTML = 'Could not process request!';
         }
-
     } else {
 
         // Display the alert message
@@ -116,6 +121,13 @@ async function submitRequest() {
 
 function clearRequestForm() {
 
+    // Clear the values
+    document.getElementById('reimbursement-amount').value = '';
+    document.getElementById('reimbursement-description').value = '';
+
+    // Hide the alert message
+    document.getElementById('dashboard-alert-msg').hidden = true;
+    document.getElementById('dashboard-alert-msg').innerHTML = '';
 }
 
 /**

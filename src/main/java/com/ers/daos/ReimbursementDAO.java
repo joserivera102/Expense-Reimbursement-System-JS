@@ -225,7 +225,7 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 			connection.setAutoCommit(false);
 
 			// Create our sequel statement
-			String sql = "INSERT INTO ers_reimbursement VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO ers_reimbursement VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			// Get primary key
 			String[] keys = new String[1];
@@ -235,15 +235,14 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 			PreparedStatement statement = connection.prepareStatement(sql, keys);
 
 			// Set statement variables
-			statement.setInt(1, reimbursement.getId());
-			statement.setDouble(2, reimbursement.getAmount());
-			statement.setTimestamp(3, reimbursement.getDateSubmitted());
-			statement.setTimestamp(4, reimbursement.getDateResolved());
-			statement.setString(5, reimbursement.getDescription());
-			statement.setInt(6, reimbursement.getAuthorId());
-			statement.setInt(7, reimbursement.getResolverId());
-			statement.setInt(8, reimbursement.getStatusId());
-			statement.setInt(9, reimbursement.getTypeId());
+			statement.setDouble(1, reimbursement.getAmount());
+			statement.setTimestamp(2, reimbursement.getDateSubmitted());
+			statement.setTimestamp(3, reimbursement.getDateResolved());
+			statement.setString(4, reimbursement.getDescription());
+			statement.setInt(5, reimbursement.getAuthorId());
+			statement.setInt(6, reimbursement.getResolverId());
+			statement.setInt(7, reimbursement.getStatusId());
+			statement.setInt(8, reimbursement.getTypeId());
 
 			int rowsInserted = statement.executeUpdate();
 
