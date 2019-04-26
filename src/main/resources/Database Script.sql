@@ -203,7 +203,7 @@ INSERT
 	'resolver',
 	'resolver',
 	'resolver',
-	'resolver',
+	'resolver@resolver.com',
 	2 );
 
 INSERT
@@ -215,17 +215,6 @@ INSERT
 	'Jose',
 	'Rivera',
 	'jose@yahoo.com',
-	2 );
-
-INSERT
-	INTO
-		ers_users
-	VALUES ( 0,
-	'resolver',
-	'Resolver1',
-	'resolver',
-	'resolver',
-	'resolver@resolver.com',
 	2 );
 
 COMMIT;
