@@ -17,7 +17,7 @@ import com.ers.util.ConnectionFactory;
 
 /**
  * User Data Access Object ( DAO ) Class. This class will establish a connection
- * to the database in order to persist a user.
+ * to the database in order to perform CRUD methods on users.
  * 
  * @author Jose Rivera
  *
@@ -192,7 +192,8 @@ public class UserDAO implements DAO<User> {
 			if (rowsInserted != 0) {
 				while (resultSet.next())
 					user.setId(resultSet.getInt(1));
-			}
+			} else
+				throw new Exception("In UserDAO.add():: User was not added successfully.");
 
 			// Commit our changes
 			connection.commit();
