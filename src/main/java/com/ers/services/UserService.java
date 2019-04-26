@@ -9,7 +9,7 @@ import com.ers.models.User;
 
 /**
  * User Service Class. Will handle accepting a request from the servlet to
- * facilitate user functions.
+ * facilitate user functions and validation.
  * 
  * @author Jose Rivera
  *
@@ -57,7 +57,7 @@ public class UserService {
 	public User getById(int id) {
 
 		if (id <= 0) {
-			LOG.warn("In UserService.getById():: Id was less than or equal to zero");
+			LOG.warn("In UserService.getById():: Id was invalid");
 			return null;
 		}
 
@@ -91,7 +91,7 @@ public class UserService {
 	public User update(User updatedUser) {
 
 		if (updatedUser == null) {
-			LOG.warn("In UserService.update():: Updated user was null");
+			LOG.warn("In UserService.update():: Updated user was " + updatedUser);
 			return null;
 		}
 
@@ -108,7 +108,7 @@ public class UserService {
 	public boolean delete(int id) {
 
 		if (id <= 0) {
-			LOG.warn("In UserService.delete():: Id was less than or equal to zero");
+			LOG.warn("In UserService.delete():: Id was invalid");
 			return false;
 		}
 
