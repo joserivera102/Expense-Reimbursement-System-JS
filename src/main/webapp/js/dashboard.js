@@ -32,6 +32,9 @@ function configureDashboard() {
     document.getElementById('update-profile-btn').addEventListener('click', function() {
         showForm('update-form');
     });
+
+    document.getElementById('submit-request-btn').addEventListener('click', submitRequest);
+    document.getElementById('clear-form-btn').addEventListener('click', clearRequestForm);
 }
 
 /**
