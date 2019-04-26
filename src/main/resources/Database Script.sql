@@ -71,7 +71,7 @@ CREATE
 CREATE
 	TABLE
 		ers_user_roles ( ers_user_role_id NUMBER NOT NULL,
-		user_role VARCHAR2(10) NOT NULL,
+		user_role VARCHAR2(15) NOT NULL,
 		CONSTRAINT ers_user_roles_pk PRIMARY KEY (ers_user_role_id) );
 
 CREATE
@@ -194,7 +194,7 @@ INSERT
 	INTO
 		ers_user_roles
 	VALUES ( 2,
-	'F_MANAGER' );
+	'FINANCE_MANAGER' );
 
 INSERT
 	INTO
