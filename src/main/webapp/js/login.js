@@ -44,14 +44,14 @@ async function loginUser() {
 
         if (request.status == 200) {
 
-            let response = await request.json();
-
-            console.log(response);
-
             // Display login success message
             document.getElementById('login-alert-msg').setAttribute('class', SUCCESS_ALERT_CLASS);
             document.getElementById('login-alert-msg').innerHTML = 'Login Successful!';
             document.getElementById('login-alert-msg').hidden = false;
+
+            let response = await request.json();
+
+            // TODO save this response to local storage (JWT)
 
             // Navigate to dashboard, calling loadDashboard() from app.js
             loadDashboard();
@@ -64,7 +64,11 @@ async function loginUser() {
             document.getElementById('login-alert-msg').hidden = false;
         }
     } else {
-        // TODO
+
+        // Display login failure message
+        document.getElementById('login-alert-msg').setAttribute('class', DANGER_ALERT_CLASS);
+        document.getElementById('login-alert-msg').innerHTML = 'Please enter proper field values!';
+        document.getElementById('login-alert-msg').hidden = false;
     }
 }
 
