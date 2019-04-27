@@ -48,8 +48,6 @@ async function loginUser() {
             // Save the JWT into local storage
             localStorage.setItem('jwt', request.headers.get('Authorization'));
 
-            console.log(localStorage.getItem('jwt'));
-
             // Navigate to dashboard, calling loadDashboard() from app.js
             loadDashboard();
 

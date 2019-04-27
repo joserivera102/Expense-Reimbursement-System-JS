@@ -16,15 +16,26 @@ let dynamicJS;
 
 /**
  * Onload function to set up event listeners when the page loads.
+ * Will also check for a JWT in the local storage and load the dashboard
+ * exists.
  */
 window.onload = function() {
 
+    localStorage.clear();
+
+    // Button event listeners
     document.getElementById('to-home').addEventListener('click', loadHome);
     document.getElementById('to-login').addEventListener('click', loadLogin);
     document.getElementById('to-register').addEventListener('click', loadRegister);
     document.getElementById('to-dashboard').addEventListener('click', loadDashboard);
     document.getElementById('to-contact-us').addEventListener('click', loadContactUs);
     document.getElementById('to-logout').addEventListener('click', logout);
+
+    // Check for a JWT
+    if (localStorage.getItem('jwt'))
+        loadDashboard()
+    else
+        loadLogin();
 }
 
 /**
@@ -116,9 +127,15 @@ function changeScript(src) {
  */
 async function fetchView(uri) {
 
-    let response = await fetch(uri);
+    let response = await fetch(uri, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Authorization': localStorage.getItem('jwt')
+        }
+    });
 
-    if (response.status == 401)
+    if (response.status != 200)
         loadLogin();
 
     return await response.text();
