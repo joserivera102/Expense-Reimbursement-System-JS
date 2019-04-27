@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 
 import com.ers.models.User;
 import com.ers.services.UserService;
+import com.ers.util.JWTConfig;
+import com.ers.util.JWTGenerator;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,13 +71,16 @@ public class AuthServlet extends HttpServlet {
 				return;
 			}
 
+			// Add appropriate headers to the user
+			resp.addHeader(JWTConfig.HEADER, JWTConfig.PREFIX + JWTGenerator.createJWT(user));
+
 			// login was successful, set status to 200
 			resp.setStatus(200);
 
 			// Send our user object back to client
 			PrintWriter printWriter = resp.getWriter();
 			resp.setContentType("application/json");
-			
+
 			// Write the user back as JSON
 			String userJson = objectMapper.writeValueAsString(user);
 			printWriter.write(userJson);

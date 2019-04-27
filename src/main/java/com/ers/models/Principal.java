@@ -6,7 +6,7 @@ package com.ers.models;
  * @author Jose Rivera
  *
  */
-public class Principle {
+public class Principal {
 
 	private String id;
 	private String password;
@@ -15,7 +15,7 @@ public class Principle {
 	/**
 	 * No Args Constructor
 	 */
-	public Principle() {
+	public Principal() {
 		super();
 	}
 

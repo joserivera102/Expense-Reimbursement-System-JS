@@ -1,9 +1,5 @@
 console.log('login.js loaded');
 
-// Constant Variables
-const SUCCESS_ALERT_CLASS = "alert alert-success text-center";
-const DANGER_ALERT_CLASS = "alert alert-danger text-center";
-
 configureLogin();
 
 /**
@@ -50,6 +46,7 @@ async function loginUser() {
             let response = await request.json();
 
             // TODO save this response to local storage (JWT)
+            console.log(response);
 
             // Navigate to dashboard, calling loadDashboard() from app.js
             loadDashboard();

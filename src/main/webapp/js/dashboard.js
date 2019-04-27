@@ -1,9 +1,5 @@
 console.log('dashboard.js loaded');
 
-// Constant Variables
-const SUCCESS_ALERT_CLASS = "alert alert-success text-center";
-const DANGER_ALERT_CLASS = "alert alert-danger text-center";
-
 configureDashboard();
 
 /**
