@@ -31,7 +31,7 @@ public class AuthServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1444101574839108227L;
 
-	private static final Logger LOG = Logger.getLogger(RegisterUserServlet.class);
+	private static final Logger LOG = Logger.getLogger(AuthServlet.class);
 
 	private UserService userService = new UserService();
 

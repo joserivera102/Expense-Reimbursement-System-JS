@@ -128,7 +128,7 @@ function clearRequestForm() {
 /**
  * Helper function to check if the fields are not empty.
  * 
- * @param {String Array} fieldsArr The array of strings to check.
+ * @param {String[]} fieldsArr The array of strings to check.
  * 
  * @return True if the fields are valid, false if not.
  */
