@@ -11,7 +11,7 @@ public class TestDriver {
 
 		ReimbursementDAO dao = new ReimbursementDAO();
 
-		List<Reimbursement> testList = dao.getAll();
+		List<Reimbursement> testList = dao.getByStatus(2);
 		
 		System.out.println(testList);
 	}
