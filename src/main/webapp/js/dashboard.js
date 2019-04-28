@@ -25,12 +25,14 @@ function configureDashboard() {
 
     document.getElementById('view-my-submissions-btn').addEventListener('click', function() {
         showForm('submissions-form');
+        getAllReimbursements();
     });
 
     document.getElementById('update-profile-btn').addEventListener('click', function() {
         showForm('update-form');
     });
 
+    // Request form event listeners
     document.getElementById('submit-request-btn').addEventListener('click', submitRequest);
     document.getElementById('clear-form-btn').addEventListener('click', clearRequestForm);
 }
@@ -97,7 +99,8 @@ async function submitRequest() {
             // Display the alert message
             alertMessage(SUCCESS_ALERT_CLASS, 'Submission Successful!', false);
 
-            let response = await request.json();
+            // Clear our request form
+            clearRequestForm();
 
         } else {
 
@@ -112,6 +115,36 @@ async function submitRequest() {
 }
 
 /**
+ * Function that will perform a POST request to retrieve
+ * all reimbursements for the current user.
+ */
+async function getAllReimbursements() {
+
+    // Perform our POST request
+    let request = await fetch('getall', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('jwt'),
+            'UserId': localStorage.getItem('userId')
+        }
+    });
+
+    if (request.status == 200) {
+
+        let response = await request.json();
+
+        console.log(response);
+
+    } else {
+
+        // Display the alert message
+        alertMessage(DANGER_ALERT_CLASS, 'Unable to process request!', false);
+    }
+}
+
+/**
  * Function to clear the request form and hide any alerts that may
  * be showing.
  */
@@ -120,9 +153,6 @@ function clearRequestForm() {
     // Clear the values
     document.getElementById('reimbursement-amount').value = '';
     document.getElementById('reimbursement-description').value = '';
-
-    // Hide the alert message
-    alertMessage('', '', true);
 }
 
 /**

@@ -6,12 +6,12 @@
  */
 
 // Constant Variables
-let APP_VIEW = document.getElementById('app-view');
-let DYNAMIC_CSS = document.getElementById('dynamic-css');
 const SUCCESS_ALERT_CLASS = "alert alert-success text-center";
 const DANGER_ALERT_CLASS = "alert alert-danger text-center";
 
 // Global Variables
+let APP_VIEW = document.getElementById('app-view');
+let DYNAMIC_CSS = document.getElementById('dynamic-css');
 let dynamicJS;
 
 /**
