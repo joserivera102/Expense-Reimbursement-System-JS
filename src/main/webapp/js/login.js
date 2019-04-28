@@ -54,7 +54,6 @@ async function loginUser() {
 
             // Navigate to dashboard, calling loadDashboard() from app.js
             loadDashboard();
-
         } else {
 
             // Display the alert message

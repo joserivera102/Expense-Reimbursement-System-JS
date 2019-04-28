@@ -79,6 +79,8 @@ async function registerUser() {
             // Save the username into local storage
             localStorage.setItem('username', request.headers.get('Username'));
 
+            // Navigate to dashboard
+            loadDashboard();
         } else {
 
             // Display the alert message

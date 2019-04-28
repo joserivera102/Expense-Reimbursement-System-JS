@@ -7,6 +7,9 @@ configureDashboard();
  */
 function configureDashboard() {
 
+    // Display the user
+    document.getElementById('current-user').innerHTML = localStorage.getItem('username');
+
     // Hide the forms
     document.getElementById('request-form').hidden = true;
     document.getElementById('submissions-form').hidden = true;
@@ -70,11 +73,11 @@ async function submitRequest() {
             id: 0,
             amount: fieldsArr[0],
             dateSubmitted: Date.now(),
-            dateResolved: null,
+            dateResolved: null, // Date Resolved will be set when the reimbursement is resolved
             description: fieldsArr[1],
-            authorId: 1,
-            resolverId: 1,
-            statusId: 1,
+            authorId: localStorage.getItem('userId'),
+            resolverId: 1, // All reimbursements need a default value for resolver ( Due to database constraints )
+            statusId: 1, // All reimbursements created this way have a status of ( 1 PENDING )
             typeId: type
         }
 
@@ -83,7 +86,8 @@ async function submitRequest() {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('jwt')
             },
             body: JSON.stringify(reimbursement)
         });
