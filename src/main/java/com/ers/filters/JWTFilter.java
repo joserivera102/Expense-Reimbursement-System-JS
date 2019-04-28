@@ -45,8 +45,9 @@ public class JWTFilter extends HttpFilter {
 
 		// 2. Validate the header values and check the prefix
 		if (header == null || !header.startsWith(JWTConfig.PREFIX)) {
+
 			LOG.info("Request originates from an unauthenticated origin");
-			
+
 			// 2.1: If there is no header, or one that we provided, then go to the next step
 			// in the filter chain (target servlet)
 			chain.doFilter(req, resp);
@@ -64,7 +65,7 @@ public class JWTFilter extends HttpFilter {
 			// 5. Obtain the principal/subject stored in the JWT
 			Principal principal = new Principal();
 			principal.setId(claims.getId());
-			principal.setRole(claims.get("UserRole", String.class));
+			principal.setRole(claims.get("role", String.class));
 			principal.setPassword(claims.get("password", String.class));
 
 			/*
