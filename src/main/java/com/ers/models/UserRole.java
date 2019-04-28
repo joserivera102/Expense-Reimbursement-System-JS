@@ -10,7 +10,20 @@ public class UserRole {
 
 	private int id;
 	private String role;
-	
+
+	/**
+	 * No Args Constructor.
+	 */
+	public UserRole() {
+		super();
+	}
+
+	/**
+	 * Constructor to set up a user role.
+	 * 
+	 * @param id   The id to match to the database.
+	 * @param role The role name.
+	 */
 	public UserRole(int id, String role) {
 		super();
 		this.id = id;
