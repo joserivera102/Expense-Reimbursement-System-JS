@@ -67,12 +67,16 @@ async function registerUser() {
         // Check our status
         if (request.status == 200) {
 
-            let response = await request.json();
-
-            console.log(response);
-
             // Display the alert message
             alertMessage(SUCCESS_ALERT_CLASS, 'Registration Successful!', false);
+
+            let response = await request.json();
+
+            // Save the JWT into local storage
+            localStorage.setItem('jwt', request.headers.get('Authorization'));
+
+            // Save the username into local storage
+            localStorage.setItem('username', response.username);
 
         } else {
 

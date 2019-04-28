@@ -8,21 +8,32 @@
 // Constant Variables
 let APP_VIEW = document.getElementById('app-view');
 let DYNAMIC_CSS = document.getElementById('dynamic-css');
+const SUCCESS_ALERT_CLASS = "alert alert-success text-center";
+const DANGER_ALERT_CLASS = "alert alert-danger text-center";
 
 // Global Variables
 let dynamicJS;
 
 /**
  * Onload function to set up event listeners when the page loads.
+ * Will also check for a JWT in the local storage and load the dashboard
+ * exists.
  */
 window.onload = function() {
 
+    // Button event listeners
     document.getElementById('to-home').addEventListener('click', loadHome);
     document.getElementById('to-login').addEventListener('click', loadLogin);
     document.getElementById('to-register').addEventListener('click', loadRegister);
     document.getElementById('to-dashboard').addEventListener('click', loadDashboard);
     document.getElementById('to-contact-us').addEventListener('click', loadContactUs);
     document.getElementById('to-logout').addEventListener('click', logout);
+
+    // Check for a JWT
+    if (localStorage.getItem('jwt'))
+        loadDashboard()
+    else
+        loadLogin();
 }
 
 /**
@@ -63,7 +74,16 @@ async function loadRegister() {
  * loads the dashboard css and js scripts.
  */
 async function loadDashboard() {
+
     APP_VIEW.innerHTML = await fetchView('dashboard.view');
+
+    /*
+         Dashboard should not load if the user was not authenticated.
+         If the fetchview() did not return the proper text, leave this function call.
+    */
+    if (APP_VIEW.innerHTML == '')
+        return;
+
     DYNAMIC_CSS.href = 'css/dashboard.css';
     changeScript('js/dashboard.js');
 }
@@ -107,14 +127,21 @@ function changeScript(src) {
 
 /**
  * Function that makes a GET request to the server
- * to load the view based on the uri that is passed in.
+ * to load the view based on the uri that is passed in. 
+ * Contains the JWT in the header for authentication.
  * 
- * If the status returned is anything but 200, reload the login page
+ * If the status returned is 401 ( Unauthorized ), reloads the login page.
  * @param {String} uri 
  */
 async function fetchView(uri) {
 
-    let response = await fetch(uri);
+    let response = await fetch(uri, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Authorization': localStorage.getItem('jwt')
+        }
+    });
 
     if (response.status == 401)
         loadLogin();

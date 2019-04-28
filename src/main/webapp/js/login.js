@@ -1,9 +1,5 @@
 console.log('login.js loaded');
 
-// Constant Variables
-const SUCCESS_ALERT_CLASS = "alert alert-success text-center";
-const DANGER_ALERT_CLASS = "alert alert-danger text-center";
-
 configureLogin();
 
 /**
@@ -49,7 +45,11 @@ async function loginUser() {
 
             let response = await request.json();
 
-            // TODO save this response to local storage (JWT)
+            // Save the JWT into local storage
+            localStorage.setItem('jwt', request.headers.get('Authorization'));
+
+            // Save the username into local storage
+            localStorage.setItem('username', response.username);
 
             // Navigate to dashboard, calling loadDashboard() from app.js
             loadDashboard();

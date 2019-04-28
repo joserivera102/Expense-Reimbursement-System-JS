@@ -1,9 +1,5 @@
 console.log('dashboard.js loaded');
 
-// Constant Variables
-const SUCCESS_ALERT_CLASS = "alert alert-success text-center";
-const DANGER_ALERT_CLASS = "alert alert-danger text-center";
-
 configureDashboard();
 
 /**
@@ -82,8 +78,6 @@ async function submitRequest() {
             typeId: type
         }
 
-        console.log(reimbursement);
-
         // Perform our POST request
         let request = await fetch('submit', {
             method: 'POST',
@@ -98,6 +92,8 @@ async function submitRequest() {
 
             // Display the alert message
             alertMessage(SUCCESS_ALERT_CLASS, 'Submission Successful!', false);
+
+            let response = await request.json();
 
         } else {
 

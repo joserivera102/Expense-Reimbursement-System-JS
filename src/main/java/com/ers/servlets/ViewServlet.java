@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.ers.exceptions.UnauthenticatedAccessException;
 import com.ers.util.RequestViewHelper;
 
 /**
@@ -38,12 +39,20 @@ public class ViewServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-		String view = RequestViewHelper.process(req.getRequestURI());
-
 		try {
+
+			// Process the request to get the view
+			String view = RequestViewHelper.process(req);
+
+			// Forward the view back
 			req.getRequestDispatcher(view).forward(req, resp);
+
+		} catch (UnauthenticatedAccessException uae) {
+			LOG.error(uae.getMessage());
+			resp.setStatus(401);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
+			resp.setStatus(500);
 		}
 	}
 }
