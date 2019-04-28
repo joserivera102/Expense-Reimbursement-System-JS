@@ -99,7 +99,8 @@ async function submitRequest() {
             // Display the alert message
             alertMessage(SUCCESS_ALERT_CLASS, 'Submission Successful!', false);
 
-            let response = await request.json();
+            // Clear our request form
+            clearRequestForm();
 
         } else {
 
@@ -152,9 +153,6 @@ function clearRequestForm() {
     // Clear the values
     document.getElementById('reimbursement-amount').value = '';
     document.getElementById('reimbursement-description').value = '';
-
-    // Hide the alert message
-    alertMessage('', '', true);
 }
 
 /**
