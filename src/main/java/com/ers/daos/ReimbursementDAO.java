@@ -12,6 +12,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.ers.models.Reimbursement;
+import com.ers.models.ReimbursementStatus;
+import com.ers.models.ReimbursementType;
 import com.ers.models.User;
 import com.ers.util.ConnectionFactory;
 
@@ -58,8 +60,10 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 				reimbursement.setDescription(resultSet.getString("reimb_description"));
 				reimbursement.setAuthorId(resultSet.getInt("reimb_author"));
 				reimbursement.setResolverId(resultSet.getInt("reimb_resolver"));
-				reimbursement.setStatusId(resultSet.getInt("reimb_status_id"));
-				reimbursement.setTypeId(resultSet.getInt("reimb_type_id"));
+				reimbursement.setReimbursementStatus(new ReimbursementStatus(resultSet.getInt("reimb_status_id"),
+						resultSet.getString("reimb_status")));
+				reimbursement.setReimbursementType(
+						new ReimbursementType(resultSet.getInt("reimb_type_id"), resultSet.getString("reimb_type")));
 
 				// Add to the list
 				reimbursements.add(reimbursement);
@@ -107,8 +111,10 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 				reimbursement.setDescription(resultSet.getString("reimb_description"));
 				reimbursement.setAuthorId(resultSet.getInt("reimb_author"));
 				reimbursement.setResolverId(resultSet.getInt("reimb_resolver"));
-				reimbursement.setStatusId(resultSet.getInt("reimb_status_id"));
-				reimbursement.setTypeId(resultSet.getInt("reimb_type_id"));
+				reimbursement.setReimbursementStatus(new ReimbursementStatus(resultSet.getInt("reimb_status_id"),
+						resultSet.getString("reimb_status")));
+				reimbursement.setReimbursementType(
+						new ReimbursementType(resultSet.getInt("reimb_type_id"), resultSet.getString("reimb_type")));
 
 				// Add to the list
 				reimbursements.add(reimbursement);
@@ -156,8 +162,10 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 				reimbursement.setDescription(resultSet.getString("reimb_description"));
 				reimbursement.setAuthorId(resultSet.getInt("reimb_author"));
 				reimbursement.setResolverId(resultSet.getInt("reimb_resolver"));
-				reimbursement.setStatusId(resultSet.getInt("reimb_status_id"));
-				reimbursement.setTypeId(resultSet.getInt("reimb_type_id"));
+				reimbursement.setReimbursementStatus(new ReimbursementStatus(resultSet.getInt("reimb_status_id"),
+						resultSet.getString("reimb_status")));
+				reimbursement.setReimbursementType(
+						new ReimbursementType(resultSet.getInt("reimb_type_id"), resultSet.getString("reimb_type")));
 
 				// Add to the list
 				reimbursements.add(reimbursement);
@@ -201,8 +209,10 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 				reimbursement.setDescription(resultSet.getString("reimb_description"));
 				reimbursement.setAuthorId(resultSet.getInt("reimb_author"));
 				reimbursement.setResolverId(resultSet.getInt("reimb_resolver"));
-				reimbursement.setStatusId(resultSet.getInt("reimb_status_id"));
-				reimbursement.setTypeId(resultSet.getInt("reimb_type_id"));
+				reimbursement.setReimbursementStatus(new ReimbursementStatus(resultSet.getInt("reimb_status_id"),
+						resultSet.getString("reimb_status")));
+				reimbursement.setReimbursementType(
+						new ReimbursementType(resultSet.getInt("reimb_type_id"), resultSet.getString("reimb_type")));
 			}
 
 		} catch (SQLException e) {
@@ -241,8 +251,8 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 			statement.setString(4, reimbursement.getDescription());
 			statement.setInt(5, reimbursement.getAuthorId());
 			statement.setInt(6, reimbursement.getResolverId());
-			statement.setInt(7, reimbursement.getStatusId());
-			statement.setInt(8, reimbursement.getTypeId());
+			statement.setInt(7, reimbursement.getReimbursementStatus().getId());
+			statement.setInt(8, reimbursement.getReimbursementType().getId());
 
 			int rowsInserted = statement.executeUpdate();
 
@@ -294,8 +304,8 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 			statement.setString(4, updatedReimbursement.getDescription());
 			statement.setInt(5, updatedReimbursement.getAuthorId());
 			statement.setInt(6, updatedReimbursement.getResolverId());
-			statement.setInt(7, updatedReimbursement.getStatusId());
-			statement.setInt(8, updatedReimbursement.getTypeId());
+			statement.setInt(7, updatedReimbursement.getReimbursementStatus().getId());
+			statement.setInt(8, updatedReimbursement.getReimbursementType().getId());
 			statement.setInt(9, updatedReimbursement.getId());
 
 			int rowsInserted = statement.executeUpdate();
