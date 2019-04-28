@@ -81,14 +81,19 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
 		} catch (IllegalStateException ise) {
 			LOG.error(ise.getMessage());
+			resp.setStatus(400);
 		} catch (JsonParseException jpe) {
 			LOG.error(jpe.getMessage());
+			resp.setStatus(400);
 		} catch (JsonMappingException jmp) {
 			LOG.error(jmp.getMessage());
+			resp.setStatus(400);
 		} catch (IOException ioe) {
 			LOG.error(ioe.getMessage());
+			resp.setStatus(400);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
+			resp.setStatus(500);
 		}
 	}
 }

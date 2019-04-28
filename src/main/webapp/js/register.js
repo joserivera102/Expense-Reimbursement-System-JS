@@ -70,14 +70,17 @@ async function registerUser() {
             // Display the alert message
             alertMessage(SUCCESS_ALERT_CLASS, 'Registration Successful!', false);
 
-            let response = await request.json();
-
             // Save the JWT into local storage
             localStorage.setItem('jwt', request.headers.get('Authorization'));
 
-            // Save the username into local storage
-            localStorage.setItem('username', response.username);
+            // Save the user id into local storage
+            localStorage.setItem('userId', request.headers.get('UserId'));
 
+            // Save the username into local storage
+            localStorage.setItem('username', request.headers.get('Username'));
+
+            // Navigate to dashboard
+            loadDashboard();
         } else {
 
             // Display the alert message

@@ -1,6 +1,5 @@
 package com.ers.models;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 /**

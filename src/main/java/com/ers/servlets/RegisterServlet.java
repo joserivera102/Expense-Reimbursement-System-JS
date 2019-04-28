@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 
 import com.ers.models.User;
 import com.ers.services.UserService;
+import com.ers.util.JWTConfig;
+import com.ers.util.JWTGenerator;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,25 +71,35 @@ public class RegisterServlet extends HttpServlet {
 
 			// Our user was successfully added
 			resp.setStatus(200);
+			
+			// Add appropriate headers for the user
+			resp.addHeader(JWTConfig.HEADER, JWTConfig.PREFIX + JWTGenerator.createJWT(user));
+			resp.addHeader("UserId", String.valueOf(user.getId()));
+			resp.addHeader("Username", user.getUsername());
 
 			// Send our user object back to client
 			PrintWriter printWriter = resp.getWriter();
 			resp.setContentType("application/json");
-			
+
 			// Write our user back as JSON
 			String userJson = objectMapper.writeValueAsString(user);
 			printWriter.write(userJson);
-			
+
 		} catch (IllegalStateException ise) {
 			LOG.error(ise.getMessage());
+			resp.setStatus(400);
 		} catch (JsonParseException jpe) {
 			LOG.error(jpe.getMessage());
+			resp.setStatus(400);
 		} catch (JsonMappingException jmp) {
 			LOG.error(jmp.getMessage());
+			resp.setStatus(400);
 		} catch (IOException ioe) {
 			LOG.error(ioe.getMessage());
+			resp.setStatus(400);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
+			resp.setStatus(500);
 		}
 	}
 }
