@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.ers.models.Principal;
 import com.ers.models.Reimbursement;
 import com.ers.services.ReimbursementService;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -44,6 +45,15 @@ public class SubmitReimbursementServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		try {
+			
+			// Extra validation to make sure the request was authorized
+			Principal principal = (Principal) req.getAttribute("principal");
+			
+			if(principal == null) {
+				LOG.warn("In SubmitReimbursementServlet.doPost():: Principal was null. Access Denied");
+				resp.setStatus(401);
+				return;
+			}
 
 			// Get the object mapper
 			ObjectMapper objectMapper = new ObjectMapper();
