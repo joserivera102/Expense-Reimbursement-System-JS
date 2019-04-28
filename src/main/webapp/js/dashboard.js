@@ -40,25 +40,28 @@ function configureDashboard() {
 async function submitRequest() {
 
     // Variable for the type id of the reimbursement
-    let type;
+    let typeId;
+
+    // Variable for the type name
+    let typeName = document.getElementById('reimbursement-type').value;
 
     // Get the select input value
-    switch (document.getElementById('reimbursement-type').value) {
+    switch (typeName) {
 
         case 'Lodging':
-            type = 1;
+            typeId = 1;
             break;
 
         case 'Travel':
-            type = 2;
+            typeId = 2;
             break;
 
         case 'Food':
-            type = 3;
+            typeId = 3;
             break;
 
         case 'Other':
-            type = 4;
+            typeId = 4;
             break;
     }
 
@@ -70,6 +73,18 @@ async function submitRequest() {
 
     if (fieldsValid(fieldsArr)) {
 
+        // Create the reimbursement status
+        let reimbursementStatus = {
+            id: 1,
+            status: 'PENDING'
+        }
+
+        // Create the reimbursement type
+        let reimbursementType = {
+            id: typeId,
+            type: typeName
+        }
+
         // Create a reimbursement
         let reimbursement = {
             id: 0,
@@ -79,8 +94,8 @@ async function submitRequest() {
             description: fieldsArr[1],
             authorId: localStorage.getItem('userId'),
             resolverId: 1, // All reimbursements need a default value for resolver ( Due to database constraints )
-            statusId: 1, // All reimbursements created this way have a status of ( 1 PENDING )
-            typeId: type
+            reimbursementStatus: reimbursementStatus,
+            reimbursementType: reimbursementType
         }
 
         // Perform our POST request

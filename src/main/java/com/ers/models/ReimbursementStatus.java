@@ -11,6 +11,25 @@ public class ReimbursementStatus {
 	private int id;
 	private String status;
 
+	/**
+	 * No Args Constructor
+	 */
+	public ReimbursementStatus() {
+		super();
+	}
+
+	/**
+	 * Constructor used to create a reimbursement status.
+	 * 
+	 * @param id     The id for the lookup table in the database.
+	 * @param status String status name.
+	 */
+	public ReimbursementStatus(int id, String status) {
+		super();
+		this.id = id;
+		this.status = status;
+	}
+
 	public int getId() {
 		return id;
 	}

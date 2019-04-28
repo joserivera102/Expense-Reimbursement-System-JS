@@ -11,6 +11,25 @@ public class ReimbursementType {
 	private int id;
 	private String type;
 
+	/**
+	 * No Args Constructor
+	 */
+	public ReimbursementType() {
+		super();
+	}
+
+	/**
+	 * Constructor to create a reimbursement type.
+	 * 
+	 * @param id   The id for the lookup table in the database.
+	 * @param type String type of reimbursement.
+	 */
+	public ReimbursementType(int id, String type) {
+		super();
+		this.id = id;
+		this.type = type;
+	}
+
 	public int getId() {
 		return id;
 	}

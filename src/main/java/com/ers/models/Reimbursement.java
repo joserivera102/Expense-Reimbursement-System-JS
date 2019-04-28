@@ -17,31 +17,32 @@ public class Reimbursement {
 	private String description;
 	private int authorId;
 	private int resolverId;
-	private int statusId;
-	private int typeId;
+	private ReimbursementStatus reimbursementStatus;
+	private ReimbursementType reimbursementType;
 
 	/**
-	 * No Args Constructor.
+	 * No Args constructor
 	 */
 	public Reimbursement() {
 		super();
 	}
 
 	/**
-	 * Constructor to create a Reimbursement.
+	 * Constructor to create a new reimbursement.
 	 * 
-	 * @param id: A unique id for the Reimbursement.
-	 * @param amount: The amount for the Reimbursement.
-	 * @param dateSubmitted: The date that the Reimbursement was submitted.
-	 * @param dateResolved: The date that the Reimbursement was resolved.
-	 * @param description: A description of the Reimbursement.
-	 * @param authorId: The author id.
-	 * @param resolverId: The resolver id.
-	 * @param statusId: A status id.
-	 * @param typeId: The type id.
+	 * @param id                  The id of the reimbursement.
+	 * @param amount              The amount of the reimbursement.
+	 * @param dateSubmitted       Timestamp for date submitted.
+	 * @param dateResolved        Timestamp for date resolved.
+	 * @param description         A description of the reimbursement.
+	 * @param authorId            The id of the author ( User ).
+	 * @param resolverId          The id of the resolver.
+	 * @param reimbursementStatus The status of the reimbursement.
+	 * @param reimbursementType   The type of reimbursement.
 	 */
 	public Reimbursement(int id, double amount, Timestamp dateSubmitted, Timestamp dateResolved, String description,
-			int authorId, int resolverId, int statusId, int typeId) {
+			int authorId, int resolverId, ReimbursementStatus reimbursementStatus,
+			ReimbursementType reimbursementType) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -50,8 +51,8 @@ public class Reimbursement {
 		this.description = description;
 		this.authorId = authorId;
 		this.resolverId = resolverId;
-		this.statusId = statusId;
-		this.typeId = typeId;
+		this.reimbursementStatus = reimbursementStatus;
+		this.reimbursementType = reimbursementType;
 	}
 
 	public int getId() {
@@ -110,20 +111,20 @@ public class Reimbursement {
 		this.resolverId = resolverId;
 	}
 
-	public int getStatusId() {
-		return statusId;
+	public ReimbursementStatus getReimbursementStatus() {
+		return reimbursementStatus;
 	}
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
+	public void setReimbursementStatus(ReimbursementStatus reimbursementStatus) {
+		this.reimbursementStatus = reimbursementStatus;
 	}
 
-	public int getTypeId() {
-		return typeId;
+	public ReimbursementType getReimbursementType() {
+		return reimbursementType;
 	}
 
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
+	public void setReimbursementType(ReimbursementType reimbursementType) {
+		this.reimbursementType = reimbursementType;
 	}
 
 	@Override
@@ -138,9 +139,9 @@ public class Reimbursement {
 		result = prime * result + ((dateSubmitted == null) ? 0 : dateSubmitted.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((reimbursementStatus == null) ? 0 : reimbursementStatus.hashCode());
+		result = prime * result + ((reimbursementType == null) ? 0 : reimbursementType.hashCode());
 		result = prime * result + resolverId;
-		result = prime * result + statusId;
-		result = prime * result + typeId;
 		return result;
 	}
 
@@ -174,11 +175,17 @@ public class Reimbursement {
 			return false;
 		if (id != other.id)
 			return false;
+		if (reimbursementStatus == null) {
+			if (other.reimbursementStatus != null)
+				return false;
+		} else if (!reimbursementStatus.equals(other.reimbursementStatus))
+			return false;
+		if (reimbursementType == null) {
+			if (other.reimbursementType != null)
+				return false;
+		} else if (!reimbursementType.equals(other.reimbursementType))
+			return false;
 		if (resolverId != other.resolverId)
-			return false;
-		if (statusId != other.statusId)
-			return false;
-		if (typeId != other.typeId)
 			return false;
 		return true;
 	}
@@ -187,6 +194,7 @@ public class Reimbursement {
 	public String toString() {
 		return "Reimbursement [id=" + id + ", amount=" + amount + ", dateSubmitted=" + dateSubmitted + ", dateResolved="
 				+ dateResolved + ", description=" + description + ", authorId=" + authorId + ", resolverId="
-				+ resolverId + ", statusId=" + statusId + ", typeId=" + typeId + "]";
+				+ resolverId + ", reimbursementStatus=" + reimbursementStatus + ", reimbursementType="
+				+ reimbursementType + "]";
 	}
 }

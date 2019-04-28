@@ -1,5 +1,6 @@
 package com.ers.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -40,7 +41,7 @@ public class ReimbursementService {
 
 		if (user == null) {
 			LOG.warn("In ReimbursementService.getByUser():: User was " + user);
-			return null;
+			return new ArrayList<>();
 		}
 
 		return reimbursementDao.getByUser(user);
@@ -56,7 +57,7 @@ public class ReimbursementService {
 
 		if (statusId <= 0 || statusId > 3) {
 			LOG.warn("In ReimbursementService.getByStatus():: Status id was invalid");
-			return null;
+			return new ArrayList<>();
 		}
 
 		return reimbursementDao.getByStatus(statusId);
