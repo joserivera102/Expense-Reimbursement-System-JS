@@ -112,6 +112,36 @@ async function submitRequest() {
 }
 
 /**
+ * Function that will perform a POST request to retrieve
+ * all reimbursements for the current user.
+ */
+async function getAllReimbursements() {
+
+    // Perform our POST request
+    let request = await fetch('getall', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('jwt'),
+            'UserId': localStorage.getItem('userId')
+        }
+    });
+
+    if (request.status == 200) {
+
+        let response = await request.json();
+
+        console.log(response);
+
+    } else {
+
+        // Display the alert message
+        alertMessage(DANGER_ALERT_CLASS, 'Unable to process request!', false);
+    }
+}
+
+/**
  * Function to clear the request form and hide any alerts that may
  * be showing.
  */
