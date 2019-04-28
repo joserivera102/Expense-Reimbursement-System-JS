@@ -74,7 +74,16 @@ async function loadRegister() {
  * loads the dashboard css and js scripts.
  */
 async function loadDashboard() {
+
     APP_VIEW.innerHTML = await fetchView('dashboard.view');
+
+    /*
+         Dashboard should not load if the user was not authenticated.
+         If the fetchview() did not return the proper text, leave this function call.
+    */
+    if (APP_VIEW.innerHTML == '')
+        return;
+
     DYNAMIC_CSS.href = 'css/dashboard.css';
     changeScript('js/dashboard.js');
 }
@@ -118,9 +127,10 @@ function changeScript(src) {
 
 /**
  * Function that makes a GET request to the server
- * to load the view based on the uri that is passed in.
+ * to load the view based on the uri that is passed in. 
+ * Contains the JWT in the header for authentication.
  * 
- * If the status returned is anything but 200, reload the login page
+ * If the status returned is 401 ( Unauthorized ), reloads the login page.
  * @param {String} uri 
  */
 async function fetchView(uri) {
@@ -133,7 +143,7 @@ async function fetchView(uri) {
         }
     });
 
-    if (response.status != 200)
+    if (response.status == 401)
         loadLogin();
 
     return await response.text();

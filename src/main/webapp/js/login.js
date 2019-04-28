@@ -48,6 +48,9 @@ async function loginUser() {
             // Save the JWT into local storage
             localStorage.setItem('jwt', request.headers.get('Authorization'));
 
+            // Save the username into local storage
+            localStorage.setItem('username', response.username);
+
             // Navigate to dashboard, calling loadDashboard() from app.js
             loadDashboard();
 

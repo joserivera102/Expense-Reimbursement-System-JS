@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
+import com.ers.exceptions.UnauthenticatedAccessException;
 import com.ers.models.Principal;
 
 /**
@@ -22,12 +23,14 @@ public class RequestViewHelper {
 
 	/**
 	 * Method that takes in the uri from the request and passes it through a switch
-	 * statement to retrieve the correct view
+	 * statement to retrieve the correct view.
 	 * 
-	 * @param uri: String for the view name
-	 * @return The proper view or null if no view is found
+	 * @param uri: String for the view name.
+	 * @return The proper view or null if no view is found.
+	 * @throws UnauthenticatedAccessException Exception thrown if the user is not
+	 *                                        authenticated.
 	 */
-	public static String process(HttpServletRequest req) {
+	public static String process(HttpServletRequest req) throws UnauthenticatedAccessException {
 
 		switch (req.getRequestURI()) {
 
@@ -42,10 +45,9 @@ public class RequestViewHelper {
 			// Check for authentication
 			Principal principal = (Principal) req.getAttribute("principal");
 
-			if (principal == null) {
-				LOG.warn("In RequestViewHelper.process():: No principal attribute found on request object");
-				return null;
-			}
+			if (principal == null)
+				throw new UnauthenticatedAccessException(
+						"In RequestViewHelper.process():: No principal attribute found on request object");
 
 			return "partials/dashboard.html";
 
@@ -53,7 +55,7 @@ public class RequestViewHelper {
 			return "partials/contact-us.html";
 
 		default:
-			LOG.warn("In RequestViewHelper.process():: uri was " + uri);
+			LOG.warn("In RequestViewHelper.process():: uri was " + req.getRequestURI());
 			return null;
 		}
 	}

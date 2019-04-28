@@ -78,8 +78,6 @@ async function submitRequest() {
             typeId: type
         }
 
-        console.log(reimbursement);
-
         // Perform our POST request
         let request = await fetch('submit', {
             method: 'POST',
@@ -94,6 +92,8 @@ async function submitRequest() {
 
             // Display the alert message
             alertMessage(SUCCESS_ALERT_CLASS, 'Submission Successful!', false);
+
+            let response = await request.json();
 
         } else {
 
