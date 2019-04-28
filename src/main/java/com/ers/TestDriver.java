@@ -1,19 +1,14 @@
 package com.ers;
 
-import java.util.List;
-
-import com.ers.daos.ReimbursementDAO;
-import com.ers.models.Reimbursement;
-
+/**
+ * Driver class used for testing purposes.
+ * 
+ * @author Jose Rivera
+ *
+ */
 public class TestDriver {
 
 	public static void main(String[] args) {
 
-		ReimbursementDAO dao = new ReimbursementDAO();
-
-		Reimbursement test = dao.getById(7);
-
-		System.out.println(test);
 	}
-
 }
