@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 
  * @author Jose Rivera
  */
+@WebServlet("/getall")
 public class GetAllReimbursementsForUser extends HttpServlet {
 
 	/**
@@ -67,7 +69,7 @@ public class GetAllReimbursementsForUser extends HttpServlet {
 			// Get the reimbursements for that user. Can be an empty list
 			List<Reimbursement> reimbursements = reimbursementService.getByUser(user);
 
-			// Everything was successful, set the status to ok
+			// Everything was successful, set the status to OK
 			resp.setStatus(200);
 
 			// Send our list back to client

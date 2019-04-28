@@ -25,12 +25,14 @@ function configureDashboard() {
 
     document.getElementById('view-my-submissions-btn').addEventListener('click', function() {
         showForm('submissions-form');
+        getAllReimbursements();
     });
 
     document.getElementById('update-profile-btn').addEventListener('click', function() {
         showForm('update-form');
     });
 
+    // Request form event listeners
     document.getElementById('submit-request-btn').addEventListener('click', submitRequest);
     document.getElementById('clear-form-btn').addEventListener('click', clearRequestForm);
 }
