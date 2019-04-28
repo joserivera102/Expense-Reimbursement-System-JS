@@ -11,9 +11,9 @@ public class TestDriver {
 
 		ReimbursementDAO dao = new ReimbursementDAO();
 
-		List<Reimbursement> testList = dao.getByStatus(2);
-		
-		System.out.println(testList);
+		Reimbursement test = dao.getById(7);
+
+		System.out.println(test);
 	}
 
 }

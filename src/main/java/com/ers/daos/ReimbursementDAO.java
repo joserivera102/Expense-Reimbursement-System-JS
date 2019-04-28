@@ -200,7 +200,10 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 		try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
 
 			// Create our sequel statement
-			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_id = ?";
+			String sql = "SELECT * FROM ers_reimbursement" + " INNER JOIN ers_reimbursement_status ON"
+					+ " ers_reimbursement.reimb_status_id = ers_reimbursement_status.reimb_status_id"
+					+ " INNER JOIN ers_reimbursement_type ON"
+					+ " ers_reimbursement.reimb_type_id = ers_reimbursement_type.reimb_type_id" + " WHERE reimb_id = ?";
 
 			// Create our prepared statement
 			PreparedStatement statement = connection.prepareStatement(sql);
