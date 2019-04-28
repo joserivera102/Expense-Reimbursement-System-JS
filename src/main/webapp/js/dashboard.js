@@ -24,8 +24,8 @@ function configureDashboard() {
     });
 
     document.getElementById('view-my-submissions-btn').addEventListener('click', function() {
-        showForm('submissions-form');
         getAllReimbursements();
+        showForm('submissions-form');
     });
 
     document.getElementById('update-profile-btn').addEventListener('click', function() {
@@ -155,6 +155,9 @@ async function getAllReimbursements() {
         // Check to make sure we have at least one submission to display
         if (response.length > 0) {
 
+            // Clear the table before building
+            clearTable();
+
             for (let i = 0; i < response.length; i++) {
 
                 // Convert the timestamp
@@ -266,6 +269,18 @@ function clearRequestForm() {
     // Clear the values
     document.getElementById('reimbursement-amount').value = '';
     document.getElementById('reimbursement-description').value = '';
+}
+
+/**
+ * Function to clear the table and get it 
+ * ready for new values
+ */
+function clearTable() {
+
+    // This will clear the values in the table
+    while (document.getElementById('submission-table-body').firstChild) {
+        document.getElementById('submission-table-body').removeChild(document.getElementById('submission-table-body').firstChild);
+    }
 }
 
 /**
