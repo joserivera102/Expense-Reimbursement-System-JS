@@ -38,7 +38,7 @@ public class ViewServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-		String view = RequestViewHelper.process(req.getRequestURI());
+		String view = RequestViewHelper.process(req);
 
 		try {
 			req.getRequestDispatcher(view).forward(req, resp);

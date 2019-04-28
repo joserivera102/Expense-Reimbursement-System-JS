@@ -21,8 +21,6 @@ let dynamicJS;
  */
 window.onload = function() {
 
-    localStorage.clear();
-
     // Button event listeners
     document.getElementById('to-home').addEventListener('click', loadHome);
     document.getElementById('to-login').addEventListener('click', loadLogin);
