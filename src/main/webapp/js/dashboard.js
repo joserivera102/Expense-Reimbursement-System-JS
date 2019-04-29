@@ -1,4 +1,11 @@
-console.log('dashboard.js loaded');
+/**
+ * dashboard.js file used to configure the Dashboard for an employee.
+ * 
+ * @author Jose Rivera
+ */
+
+// Constant variable for the alert id
+let DASHBOARD_ALERT_ID = "dashboard-alert-msg";
 
 configureDashboard();
 
@@ -8,7 +15,7 @@ configureDashboard();
 function configureDashboard() {
 
     // Display the user
-    document.getElementById('current-user').innerHTML = localStorage.getItem('username');
+    document.getElementById('current-user').innerHTML = 'Welcome, ' + localStorage.getItem('username');
 
     // Hide the forms
     document.getElementById('request-form').hidden = true;
@@ -16,7 +23,7 @@ function configureDashboard() {
     document.getElementById('update-form').hidden = true;
 
     // Hide the alert message
-    alertMessage('', '', true);
+    alertMessage(DASHBOARD_ALERT_ID, '', '', true);
 
     // Add event listeners to buttons
     document.getElementById('create-new-request-btn').addEventListener('click', function() {
@@ -24,8 +31,8 @@ function configureDashboard() {
     });
 
     document.getElementById('view-my-submissions-btn').addEventListener('click', function() {
-        getAllReimbursements();
         showForm('submissions-form');
+        getAllReimbursements();
     });
 
     document.getElementById('update-profile-btn').addEventListener('click', function() {
@@ -35,6 +42,9 @@ function configureDashboard() {
     // Request form event listeners
     document.getElementById('submit-request-btn').addEventListener('click', submitRequest);
     document.getElementById('clear-form-btn').addEventListener('click', clearRequestForm);
+
+    // Update profile event listener
+    document.getElementById('update-profile-btn').addEventListener('click', updateProfile);
 }
 
 async function submitRequest() {
@@ -71,7 +81,7 @@ async function submitRequest() {
         document.getElementById('reimbursement-description').value,
     ];
 
-    if (fieldsValid(fieldsArr)) {
+    if (checkForEmptyFields(fieldsArr)) {
 
         // Create the reimbursement status
         let reimbursementStatus = {
@@ -112,7 +122,7 @@ async function submitRequest() {
         if (request.status == 200) {
 
             // Display the alert message
-            alertMessage(SUCCESS_ALERT_CLASS, 'Submission Successful!', false);
+            alertMessage(DASHBOARD_ALERT_ID, SUCCESS_ALERT_CLASS, 'Submission Successful!', false);
 
             // Clear our request form
             clearRequestForm();
@@ -120,12 +130,12 @@ async function submitRequest() {
         } else {
 
             // Display the alert message
-            alertMessage(DANGER_ALERT_CLASS, 'Unable to process request!', false);
+            alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Unable to process request!', false);
         }
     } else {
 
         // Display the alert message
-        alertMessage(DANGER_ALERT_CLASS, 'Invalid Fields!', false);
+        alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Invalid Fields!', false);
     }
 }
 
@@ -149,8 +159,6 @@ async function getAllReimbursements() {
     if (request.status == 200) {
 
         let response = await request.json();
-
-        console.log(response);
 
         // Check to make sure we have at least one submission to display
         if (response.length > 0) {
@@ -176,13 +184,13 @@ async function getAllReimbursements() {
         } else {
 
             // Display the alert message
-            alertMessage(DANGER_ALERT_CLASS, 'No submissions to display', false);
+            alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'No submissions to display', false);
         }
 
     } else {
 
         // Display the alert message
-        alertMessage(DANGER_ALERT_CLASS, 'Unable to process request!', false);
+        alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Unable to process request!', false);
     }
 }
 
@@ -277,6 +285,9 @@ function clearRequestForm() {
     // Clear the values
     document.getElementById('reimbursement-amount').value = '';
     document.getElementById('reimbursement-description').value = '';
+
+    // Turn off any alerts
+    alertMessage(DASHBOARD_ALERT_ID, '', '', true);
 }
 
 /**
@@ -289,23 +300,6 @@ function clearTable() {
     while (document.getElementById('submission-table-body').firstChild) {
         document.getElementById('submission-table-body').removeChild(document.getElementById('submission-table-body').firstChild);
     }
-}
-
-/**
- * Helper function to check if the fields are not empty.
- * 
- * @param {String[]} fieldsArr The array of strings to check.
- * 
- * @return True if the fields are valid, false if not.
- */
-function fieldsValid(fieldsArr) {
-
-    for (let i = 0; i < fieldsArr.length; i++) {
-        if (fieldsArr[i] == '')
-            return false;
-    }
-
-    return true;
 }
 
 /**
@@ -336,34 +330,5 @@ function showForm(name) {
     }
 
     // Turn off the alert
-    alertMessage('', '', true);
-}
-
-/**
- * Function that displays the alert and configures it appropriately.
- * 
- * @param {String} type Class attribute from bootstrap, either alert-danger or alert-success.
- * @param {String} message The message the alert displays.
- * @param {boolean} hidden boolean whether the message is hidden.
- */
-function alertMessage(type, message, hidden) {
-
-    document.getElementById('dashboard-alert-msg').hidden = hidden;
-    document.getElementById('dashboard-alert-msg').setAttribute('class', type);
-    document.getElementById('dashboard-alert-msg').innerHTML = message;
-}
-
-/**
- * Helper function to convert unix time to local time.
- * 
- * @param {String} timestamp 
- */
-function timeConverter(timestamp) {
-
-    // Updates time from a unix timestamp to local time ( en-US )
-    let date = new Date(timestamp).toLocaleDateString("en-US");
-    let time = new Date(timestamp).toLocaleTimeString("en-US")
-    let dateSubmitted = new String(date + ' @ ' + time);
-
-    return dateSubmitted;
+    alertMessage(DASHBOARD_ALERT_ID, '', '', true);
 }

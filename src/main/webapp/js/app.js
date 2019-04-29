@@ -48,8 +48,6 @@ function loadHome() {
  */
 async function loadLogin() {
 
-    console.log('in loadLogin()');
-
     APP_VIEW.innerHTML = await fetchView('login.view');
     DYNAMIC_CSS.href = 'css/login.css';
     changeScript('js/login.js');
@@ -60,6 +58,7 @@ async function loadLogin() {
  * loads the register css and js scripts.
  */
 async function loadRegister() {
+
     APP_VIEW.innerHTML = await fetchView('register.view');
     DYNAMIC_CSS.href = 'css/register.css';
     changeScript('js/register.js');
@@ -89,6 +88,7 @@ async function loadDashboard() {
  * loads the contact us css and js scripts.
  */
 async function loadContactUs() {
+
     APP_VIEW.innerHTML = await fetchView('contact-us.view');
     DYNAMIC_CSS.href = 'css/contact-us.css';
     changeScript('js/contact-us.js');
