@@ -217,11 +217,4 @@ INSERT
 	'jose@yahoo.com',
 	2 );
 
-SELECT
-	*
-FROM
-	ERS_REIMBURSEMENT
-INNER JOIN ERS_REIMBURSEMENT_STATUS ON
-	ers_reimbursement.REIMB_STATUS_ID = ers_reimbursement_status.REIMB_STATUS_ID
-INNER JOIN ERS_REIMBURSEMENT_TYPE ON
-	ers_reimbursement.REIMB_TYPE_ID = ers_reimbursement_type.REIMB_TYPE_ID
+COMMIT;

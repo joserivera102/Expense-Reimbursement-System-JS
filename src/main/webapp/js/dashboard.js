@@ -44,7 +44,7 @@ function configureDashboard() {
     document.getElementById('clear-form-btn').addEventListener('click', clearRequestForm);
 
     // Update profile event listener
-    document.getElementById('update-profile-btn').addEventListener('click', updateProfile);
+    document.getElementById('submit-update-btn').addEventListener('click', updateProfile);
 }
 
 async function submitRequest() {
@@ -124,6 +124,11 @@ async function submitRequest() {
             // Display the alert message
             alertMessage(DASHBOARD_ALERT_ID, SUCCESS_ALERT_CLASS, 'Submission Successful!', false);
 
+            // After 2 seconds, turn off the message
+            setTimeout(() => {
+                alertMessage(DASHBOARD_ALERT_ID, '', '', true);
+            }, 2000);
+
             // Clear our request form
             clearRequestForm();
 
@@ -184,7 +189,7 @@ async function getAllReimbursements() {
         } else {
 
             // Display the alert message
-            alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'No submissions to display', false);
+            alertMessage(DASHBOARD_ALERT_ID, INFO_ALERT_CLASS, 'No submissions to display', false);
         }
 
     } else {
@@ -196,10 +201,101 @@ async function getAllReimbursements() {
 
 /**
  * Function to make a PUT request to update
- * the user information that we allow.
+ * the user information that we allow. Some fields can be
+ * empty, if the user chooses not to update those.
  */
 async function updateProfile() {
 
+    // The array we send to the server with the updated info
+    let updatedInfo = new Array();
+
+    // Values
+    let email;
+    let currentPassword;
+    let newPassword;
+    let confirmPassword;
+
+    // If the email field has a value, validate and add them to the array
+    if (document.getElementById('update-email').value != '') {
+
+        email = document.getElementById('update-email').value;
+
+        if (validateEmail(email))
+            updatedInfo.push(email);
+        else {
+
+            // Display the alert message
+            alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Email invalid format!', false);
+            return;
+        }
+    }
+
+
+    // If the password field has a value, then the other fields must have values
+    if (document.getElementById('current-password').value != '') {
+
+        // Gather the password fields
+        currentPassword = document.getElementById('current-password').value;
+        newPassword = document.getElementById('new-password').value;
+        confirmPassword = document.getElementById('confirm-password').value;
+
+        // Create an array with our passwords
+        let arr = [
+            currentPassword,
+            newPassword,
+            confirmPassword
+        ];
+
+        // Make sure they are not empty fields
+        if (checkForEmptyFields(arr)) {
+
+            // Check that the new password and confirm password match
+            if (checkPasswordsMatch(newPassword, confirmPassword)) {
+
+                // Before adding, make sure password follows proper form
+                if (validatePassword(newPassword))
+                    updatedInfo.push(newPassword);
+                else {
+
+                    // Display the alert message
+                    alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Password is in invalid format!', false);
+                    return;
+                }
+            } else {
+
+                // Display the alert message
+                alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Passwords do not match!', false);
+            }
+        } else {
+
+            // Display the alert message
+            alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Invalid Fields!', false);
+        }
+    }
+
+    // If the array length is 0, don't make the request
+    if (updatedInfo.length == 0) {
+
+        // Display the alert message
+        alertMessage(DASHBOARD_ALERT_ID, INFO_ALERT_CLASS, 'Nothing to update, Please fill out the form', false);
+        return;
+    }
+
+    // Make the PUT request to the server
+    let request = await fetch('update', {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('jwt'),
+            'UserId': localStorage.getItem('userId')
+        },
+        body: JSON.stringify(updatedInfo)
+    });
+
+    if (request.status == 200) {
+
+    }
 }
 
 /**
@@ -285,9 +381,6 @@ function clearRequestForm() {
     // Clear the values
     document.getElementById('reimbursement-amount').value = '';
     document.getElementById('reimbursement-description').value = '';
-
-    // Turn off any alerts
-    alertMessage(DASHBOARD_ALERT_ID, '', '', true);
 }
 
 /**
