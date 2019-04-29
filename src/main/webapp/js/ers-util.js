@@ -21,23 +21,12 @@ const DANGER_ALERT_CLASS = "alert alert-danger text-center";
  */
 function checkForEmptyFields(arr) {
 
-    try {
+    // Loop through and check for empty values
+    for (let i = 0; i < arr.length; i++)
+        if (arr[i] == '')
+            return false;
 
-        // Check the array length
-        if (arr.length == 0)
-            throw "Array is empty";
-
-        // Loop through and check for empty values
-        for (let i = 0; i < arr.length; i++)
-            if (arr[i] == '')
-                return false;
-
-        return true;
-
-    } catch (err) {
-        console.log(err);
-        return false;
-    }
+    return true;
 }
 
 /**
@@ -52,20 +41,9 @@ function checkForEmptyFields(arr) {
  */
 function validateEmail(email) {
 
-    try {
+    let emailRegex = /\S+@\S+\.\S+/;
 
-        // Check to make sure the email field is valid
-        if (email == '')
-            throw 'Email is invalid, please check input';
-
-        let emailRegex = /\S+@\S+\.\S+/;
-
-        return (emailRegex.test(email));
-
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
+    return (emailRegex.test(email));
 }
 
 /**
@@ -74,7 +52,6 @@ function validateEmail(email) {
  * the proper form. Regex taken from StackOverflow
  * user 'Jason McCreary' ( 04/24/2019 ). Usernames must follow:
  *  - The input username should only contains alphanumeric characters.
- *  - Should only be a length of at least 8 characters.
  * 
  * @param {String} username The username to validate.
  * 
@@ -82,21 +59,9 @@ function validateEmail(email) {
  */
 function validateUsername(username) {
 
-    try {
+    let usernameRegex = /^[a-zA-Z0-9]+$/;
 
-        // Check to make sure the username field is valid
-        if (username == '')
-            throw 'Username is invalid, please check input';
-
-        let usernameRegex = /^[a-zA-Z0-9]+$/;
-        let usernameLength = 8;
-
-        return (usernameRegex.test(username) && username.length >= usernameLength)
-
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
+    return (usernameRegex.test(username))
 }
 
 /**
@@ -116,20 +81,9 @@ function validateUsername(username) {
  */
 function validatePassword(password) {
 
-    try {
+    let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
-        // Check to make sure the password field is valid
-        if (password == '')
-            throw 'Password is invalid, please check input';
-
-        let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-
-        return (passwordRegex.test(password))
-
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
+    return (passwordRegex.test(password))
 }
 
 /**
@@ -145,18 +99,7 @@ function validatePassword(password) {
  */
 function checkPasswordsMatch(updatedPasswordField, confirmPasswordField) {
 
-    try {
-
-        // Check if the password fields are valid
-        if (updatedPasswordField == '' || confirmPasswordField == '')
-            throw 'Password field(s) invalid, please check input';
-
-        return (updatedPasswordField == confirmPasswordField);
-
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
+    return (updatedPasswordField == confirmPasswordField);
 }
 
 /**

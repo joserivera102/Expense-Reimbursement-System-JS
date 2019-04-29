@@ -15,8 +15,6 @@ configureLogin();
  */
 function configureLogin() {
 
-    console.log('in configureLogin()');
-
     // Hide the alert message
     alertMessage(LOGIN_ALERT_ID, '', '', true);
 
