@@ -187,10 +187,18 @@ async function getAllReimbursements() {
 }
 
 /**
+ * Function to make a PUT request to update
+ * the user information that we allow.
+ */
+async function updateProfile() {
+
+}
+
+/**
  * Function to dynamically create the table elements using
  * the response object for submissions.
  * 
- * @param {String[]} submission 
+ * @param {any} submission 
  */
 function buildTable(submission) {
 
@@ -326,6 +334,9 @@ function showForm(name) {
             document.getElementById('update-form').hidden = false;
             break;
     }
+
+    // Turn off the alert
+    alertMessage('', '', true);
 }
 
 /**
