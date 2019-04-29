@@ -1,13 +1,9 @@
 /**
  * app.js file to help setup the event listeners for the page. Will also
- * be responsible for navigating pages. 
+ * be responsible for navigating pages and updating scripts. 
  * 
  * @author Jose Rivera
  */
-
-// Constant Variables
-const SUCCESS_ALERT_CLASS = "alert alert-success text-center";
-const DANGER_ALERT_CLASS = "alert alert-danger text-center";
 
 // Global Variables
 let APP_VIEW = document.getElementById('app-view');
@@ -106,6 +102,7 @@ function logout() {
 /**
  * Functions that dynamically changes the script tag at the end of the body.
  * Requires a new script name as a string. 
+ * 
  * @param {String} src The name of the script to be loaded.
  */
 function changeScript(src) {

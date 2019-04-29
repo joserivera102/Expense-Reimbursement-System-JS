@@ -1,4 +1,12 @@
-console.log('login.js loaded');
+/**
+ * login.js file used to control and configure the login
+ * page for the application.
+ * 
+ * @author Jose Rivera
+ */
+
+// Constant variable for the alert id
+let LOGIN_ALERT_ID = "login-alert-msg";
 
 configureLogin();
 
@@ -7,10 +15,8 @@ configureLogin();
  */
 function configureLogin() {
 
-    console.log('in configureLogin()');
-
     // Hide the alert message
-    alertMessage('', '', true);
+    alertMessage(LOGIN_ALERT_ID, '', '', true);
 
     // Add event listener to button
     document.getElementById('submit-creds').addEventListener('click', loginUser);
@@ -26,7 +32,7 @@ async function loginUser() {
         document.getElementById('password-cred').value
     ];
 
-    if (fieldsValid(credentials)) {
+    if (checkForEmptyFields(credentials)) {
 
         // Perform our POST request
         let request = await fetch('auth', {
@@ -41,7 +47,7 @@ async function loginUser() {
         if (request.status == 200) {
 
             // Display the alert message
-            alertMessage(SUCCESS_ALERT_CLASS, 'Login Successful!', false);
+            alertMessage(LOGIN_ALERT_ID, SUCCESS_ALERT_CLASS, 'Login Successful!', false);
 
             // Save the JWT into local storage
             localStorage.setItem('jwt', request.headers.get('Authorization'));
@@ -54,46 +60,15 @@ async function loginUser() {
 
             // Navigate to dashboard, calling loadDashboard() from app.js
             loadDashboard();
+
         } else {
 
             // Display the alert message
-            alertMessage(DANGER_ALERT_CLASS, 'Login Failed!', false);
+            alertMessage(LOGIN_ALERT_ID, DANGER_ALERT_CLASS, 'Login Failed!', false);
         }
     } else {
 
         // Display the alert message
-        alertMessage(DANGER_ALERT_CLASS, 'Invalid Fields!', false);
+        alertMessage(LOGIN_ALERT_ID, DANGER_ALERT_CLASS, 'Invalid Fields!', false);
     }
-}
-
-/**
- * Helper function to check if the fields are not empty.
- * 
- * @param {String Array} fieldsArr The array of strings to check.
- * 
- * @return True if the fields are valid, false if not.
- */
-function fieldsValid(fieldsArr) {
-
-    // Loop through and validate for empty values
-    for (let i = 0; i < fieldsArr.length; i++) {
-        if (fieldsArr[i] == '')
-            return false;
-    }
-
-    return true;
-}
-
-/**
- * Function that displays the alert and configures it appropriately.
- * 
- * @param {String} type Class attribute from bootstrap, either alert-danger or alert-success.
- * @param {String} message The message the alert displays.
- * @param {boolean} hidden boolean whether the message is hidden.
- */
-function alertMessage(type, message, hidden) {
-
-    document.getElementById('login-alert-msg').hidden = hidden;
-    document.getElementById('login-alert-msg').setAttribute('class', type);
-    document.getElementById('login-alert-msg').innerHTML = message;
 }
