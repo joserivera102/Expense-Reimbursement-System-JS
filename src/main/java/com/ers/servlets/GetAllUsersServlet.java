@@ -59,7 +59,7 @@ public class GetAllUsersServlet extends HttpServlet {
 						"In GetAllUsersServlet.doGet():: No principal attribute found on request object");
 
 			// Check the role of the principal
-			if (principal.getRole().equals("FINANCE_MAANGER")) {
+			if (principal.getRole().equals("FINANCE_MANAGER")) {
 
 				// Get a list of users
 				List<User> users = userService.getAllUsers();
