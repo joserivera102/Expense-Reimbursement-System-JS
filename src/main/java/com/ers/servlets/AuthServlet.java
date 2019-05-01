@@ -75,6 +75,7 @@ public class AuthServlet extends HttpServlet {
 			resp.addHeader(JWTConfig.HEADER, JWTConfig.PREFIX + JWTGenerator.createJWT(user));
 			resp.addHeader("UserId", String.valueOf(user.getId()));
 			resp.addHeader("Username", user.getUsername());
+			resp.addHeader("Role", user.getRole().getRole());
 
 			// login was successful, set status to 200
 			resp.setStatus(200);

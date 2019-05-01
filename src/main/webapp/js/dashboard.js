@@ -169,7 +169,7 @@ async function getAllReimbursements() {
         if (response.length > 0) {
 
             // Clear the table before building
-            clearTable();
+            clearTable('submission-table-body');
 
             for (let i = 0; i < response.length; i++) {
 
@@ -406,20 +406,10 @@ function clearRequestForm() {
 }
 
 /**
- * Function to clear the table and get it 
- * ready for new values
- */
-function clearTable() {
-
-    // This will clear the values in the table
-    while (document.getElementById('submission-table-body').firstChild) {
-        document.getElementById('submission-table-body').removeChild(document.getElementById('submission-table-body').firstChild);
-    }
-}
-
-/**
- * Helper function used to show a requested form when clicked.
- * @param {String} name The name of the form to show ( using id as name ).
+ * Function that uses the id of an element as the name to set the hidden attribute
+ * of that element to either show or hide that form.
+ * 
+ * @param {String} name The name of the id that belongs to the form to display.
  */
 function showForm(name) {
 

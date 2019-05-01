@@ -94,6 +94,6 @@ public class JWTFilter extends HttpFilter {
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
 		resp.setHeader("Access-Control-Allow-Headers", "Content-type, Authorization, UserId, Username");
-		resp.setHeader("Access-Control-Expose-Headers", "Authorization, UserId, Username");
+		resp.setHeader("Access-Control-Expose-Headers", "Authorization, UserId, Username, Role");
 	}
 }

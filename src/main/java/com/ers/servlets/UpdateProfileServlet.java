@@ -1,7 +1,6 @@
 package com.ers.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +12,6 @@ import org.apache.log4j.Logger;
 
 import com.ers.models.User;
 import com.ers.services.UserService;
-import com.ers.util.JWTConfig;
-import com.ers.util.JWTGenerator;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
