@@ -116,3 +116,18 @@ function alertMessage(id, type, message, hidden) {
     document.getElementById(id).setAttribute('class', type);
     document.getElementById(id).innerHTML = message;
 }
+
+/**
+ * Helper function to convert unix time to local time.
+ * 
+ * @param {String} timestamp 
+ */
+function timeConverter(timestamp) {
+
+    // Updates time from a unix timestamp to local time ( en-US )
+    let date = new Date(timestamp).toLocaleDateString("en-US");
+    let time = new Date(timestamp).toLocaleTimeString("en-US")
+    let dateSubmitted = new String(date + ' @ ' + time);
+
+    return dateSubmitted;
+}

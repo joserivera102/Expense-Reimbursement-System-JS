@@ -220,16 +220,15 @@ public class UserDAO implements DAO<User> {
 			connection.setAutoCommit(false);
 
 			// Create our sequel statement
-			String sql = "UPDATE ers_users SET user_first_name = ?, user_last_name = ?, user_password = ? WHERE ers_users_id = ?";
+			String sql = "UPDATE ers_users SET user_email = ?, ers_password = ? WHERE ers_users_id = ?";
 
 			// Create the prepared statement
 			PreparedStatement statement = connection.prepareStatement(sql);
 
 			// Set statement variables
-			statement.setString(1, updatedUser.getFirstName());
-			statement.setString(2, updatedUser.getLastName());
-			statement.setString(3, updatedUser.getPassword());
-			statement.setInt(4, updatedUser.getId());
+			statement.setString(1, updatedUser.getEmail());
+			statement.setString(2, updatedUser.getPassword());
+			statement.setInt(3, updatedUser.getId());
 
 			int rowsInserted = statement.executeUpdate();
 
