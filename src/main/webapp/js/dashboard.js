@@ -297,7 +297,27 @@ async function updateProfile() {
 
     if (request.status == 200) {
 
+        // Display the alert message
+        alertMessage(DASHBOARD_ALERT_ID, SUCCESS_ALERT_CLASS, 'Update Successful', false);
+
+        // Clear the form
+        clearUpdateForm();
+    } else {
+
+        // Display the alert message
+        alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Could not process request!', false);
     }
+}
+
+/**
+ * Function to clear the fields in the update form.
+ */
+function clearUpdateForm() {
+
+    document.getElementById('update-email').value = '';
+    document.getElementById('current-password').value = '';
+    document.getElementById('new-password').value = '';
+    document.getElementById('confirm-password').value = '';
 }
 
 /**
