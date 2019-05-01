@@ -89,7 +89,7 @@ async function loadDashboard() {
  * Function that loads the manager dashboard view from the server and
  * loads the dashboard css and js scripts.
  */
-async function loadDashboard() {
+async function loadManagerDashboard() {
 
     APP_VIEW.innerHTML = await fetchView('manager-dashboard.view');
 

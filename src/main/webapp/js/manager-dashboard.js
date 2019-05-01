@@ -59,7 +59,7 @@ function configureManagerDashboard() {
 /**
  * Function that will make a GET request to get all users.
  */
-function requestAllUsers() {
+async function requestAllUsers() {
 
     // Perform our GET request
     let request = await fetch('getusers', {

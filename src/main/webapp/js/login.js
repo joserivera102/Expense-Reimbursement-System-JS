@@ -58,8 +58,14 @@ async function loginUser() {
             // Save the username into local storage
             localStorage.setItem('username', request.headers.get('Username'));
 
-            // Navigate to dashboard, calling loadDashboard() from app.js
-            loadDashboard();
+            // Check the role of the logged in user
+            if (request.headers.get('Role') == 'EMPLOYEE') {
+                localStorage.setItem('role', request.headers.get('Role'));
+                loadDashboard();
+            } else {
+                localStorage.setItem('role', request.headers.get('Role'));
+                loadManagerDashboard();
+            }
 
         } else {
 
