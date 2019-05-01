@@ -62,11 +62,10 @@ function configureManagerDashboard() {
 function requestAllUsers() {
 
     // Perform our GET request
-    let request = await fetch('submit', {
+    let request = await fetch('getusers', {
         method: 'GET',
         headers: {
             'Authorization': localStorage.getItem('jwt'),
-            'Role': localStorage.getItem('role')
         }
     });
 
