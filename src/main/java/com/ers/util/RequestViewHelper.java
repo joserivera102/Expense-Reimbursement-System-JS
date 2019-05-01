@@ -32,6 +32,9 @@ public class RequestViewHelper {
 	 */
 	public static String process(HttpServletRequest req) throws UnauthenticatedAccessException {
 
+		// Check for authentication
+		Principal principal = (Principal) req.getAttribute("principal");
+
 		switch (req.getRequestURI()) {
 
 		case FILEPATH + "login.view":
@@ -42,14 +45,23 @@ public class RequestViewHelper {
 
 		case FILEPATH + "dashboard.view":
 
-			// Check for authentication
-			Principal principal = (Principal) req.getAttribute("principal");
-
 			if (principal == null)
 				throw new UnauthenticatedAccessException(
 						"In RequestViewHelper.process():: No principal attribute found on request object");
 
 			return "partials/dashboard.html";
+
+		case FILEPATH + "manager-dashboard.view":
+
+			if (principal == null)
+				throw new UnauthenticatedAccessException(
+						"In RequestViewHelper.process():: No principal attribute found on request object");
+
+			if (principal.getRole().equals("FINANCE_MANAGER")) {
+				return "partials/manager-dashboard.html";
+			} else
+				throw new UnauthenticatedAccessException(
+						"In RequestViewHelper.process():: User Role is unauthenticated");
 
 		case FILEPATH + "contact-us.view":
 			return "partials/contact-us.html";

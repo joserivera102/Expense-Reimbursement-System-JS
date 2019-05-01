@@ -25,9 +25,11 @@ window.onload = function() {
     document.getElementById('to-contact-us').addEventListener('click', loadContactUs);
     document.getElementById('to-logout').addEventListener('click', logout);
 
-    // Check for a JWT
-    if (localStorage.getItem('jwt'))
+    // Check for a JWT and role to load appropriate page
+    if (localStorage.getItem('jwt') && localStorage.getItem('role') == 'EMPLOYEE')
         loadDashboard()
+    else if (localStorage.getItem('jwt') && localStorage.getItem('role') == 'FINANCE_MANAGER')
+        loadManagerDashboard();
     else
         loadLogin();
 }
@@ -81,6 +83,25 @@ async function loadDashboard() {
 
     DYNAMIC_CSS.href = 'css/dashboard.css';
     changeScript('js/dashboard.js');
+}
+
+/**
+ * Function that loads the manager dashboard view from the server and
+ * loads the dashboard css and js scripts.
+ */
+async function loadDashboard() {
+
+    APP_VIEW.innerHTML = await fetchView('manager-dashboard.view');
+
+    /*
+         Dashboard should not load if the user was not authenticated.
+         If the fetchview() did not return the proper text, leave this function call.
+    */
+    if (APP_VIEW.innerHTML == '')
+        return;
+
+    DYNAMIC_CSS.href = 'css/dashboard.css';
+    changeScript('js/manager-dashboard.js');
 }
 
 /**
