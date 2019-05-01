@@ -265,11 +265,13 @@ async function updateProfile() {
 
                 // Display the alert message
                 alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Passwords do not match!', false);
+                return;
             }
         } else {
 
             // Display the alert message
             alertMessage(DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Invalid Fields!', false);
+            return;
         }
     }
 
