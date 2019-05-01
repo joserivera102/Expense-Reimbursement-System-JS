@@ -131,3 +131,17 @@ function timeConverter(timestamp) {
 
     return dateSubmitted;
 }
+
+
+/**
+ * Function to clear a table and get it ready for new values.
+ * 
+ * @param {String} id The ID of the table element.
+ */
+function clearTable(id) {
+
+    // This will clear the values in the table
+    while (document.getElementById(id).firstChild) {
+        document.getElementById(id).removeChild(document.getElementById(id).firstChild);
+    }
+}

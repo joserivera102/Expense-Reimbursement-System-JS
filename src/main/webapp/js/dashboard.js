@@ -169,7 +169,7 @@ async function getAllReimbursements() {
         if (response.length > 0) {
 
             // Clear the table before building
-            clearTable();
+            clearTable('submission-table-body');
 
             for (let i = 0; i < response.length; i++) {
 
@@ -403,18 +403,6 @@ function clearRequestForm() {
     // Clear the values
     document.getElementById('reimbursement-amount').value = '';
     document.getElementById('reimbursement-description').value = '';
-}
-
-/**
- * Function to clear the table and get it 
- * ready for new values
- */
-function clearTable() {
-
-    // This will clear the values in the table
-    while (document.getElementById('submission-table-body').firstChild) {
-        document.getElementById('submission-table-body').removeChild(document.getElementById('submission-table-body').firstChild);
-    }
 }
 
 /**

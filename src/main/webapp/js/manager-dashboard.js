@@ -157,7 +157,7 @@ async function getRequestByStatus(statusId) {
         } else {
 
             // Clear the table
-            clearTable();
+            clearTable('requests-table-body');
 
             // Display the alert message
             alertMessage(MANAGER_DASHBOARD_ALERT_ID, INFO_ALERT_CLASS, 'No reimbursements to display', false);
@@ -294,17 +294,4 @@ function buildRequestTable(submission) {
 
     // Append the entire row to the body
     tbody.append(trow);
-}
-
-/**
- * Function to clear the table and get it ready for new values.
- * 
- * @param {String} id The ID of the table element.
- */
-function clearTable(id) {
-
-    // This will clear the values in the table
-    while (document.getElementById(id).firstChild) {
-        document.getElementById(id).removeChild(document.getElementById(id).firstChild);
-    }
 }

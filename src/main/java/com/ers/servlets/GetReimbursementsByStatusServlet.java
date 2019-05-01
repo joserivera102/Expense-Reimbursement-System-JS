@@ -117,7 +117,7 @@ public class GetReimbursementsByStatusServlet extends HttpServlet {
 	 * 
 	 * @throws InvalidStatusCodeException If a status code that is not supported is
 	 *                                    requested, will throw an
-	 *                                    InvalidStatusCodeException
+	 *                                    InvalidStatusCodeException.
 	 */
 	private int getStatusId(HttpServletRequest req) throws InvalidStatusCodeException {
 
