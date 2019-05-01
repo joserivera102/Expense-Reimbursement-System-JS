@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.ers.exceptions.InvalidStatusCodeException;
 import com.ers.exceptions.UnauthenticatedAccessException;
 import com.ers.models.Principal;
 import com.ers.models.Reimbursement;
-import com.ers.models.User;
 import com.ers.services.ReimbursementService;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -64,10 +64,10 @@ public class GetReimbursementsByStatusServlet extends HttpServlet {
 			if (principal.getRole().equals("FINANCE_MANAGER")) {
 
 				// Get the status id
-				String statusId = req.getRequestURI();
+				int statusId = getStatusId(req);
 
 				// Get a list of reimbursements
-				List<Reimbursement> reimbursements = reimbursementService.getByStatus(Integer.parseInt(statusId));
+				List<Reimbursement> reimbursements = reimbursementService.getByStatus(statusId);
 
 				// Request was successful, set status to 200
 				resp.setStatus(200);
@@ -99,9 +99,42 @@ public class GetReimbursementsByStatusServlet extends HttpServlet {
 		} catch (UnauthenticatedAccessException uae) {
 			LOG.error(uae.getMessage());
 			resp.setStatus(401);
+		} catch (InvalidStatusCodeException isce) {
+			LOG.error(isce.getMessage());
+			resp.setStatus(400);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 			resp.setStatus(500);
+		}
+	}
+
+	/**
+	 * Helper function to retrieve the status id from the request URI.
+	 * 
+	 * @param req The Http Request object.
+	 * 
+	 * @return A valid status id.
+	 * 
+	 * @throws InvalidStatusCodeException If a status code that is not supported is
+	 *                                    requested, will throw an
+	 *                                    InvalidStatusCodeException
+	 */
+	private int getStatusId(HttpServletRequest req) throws InvalidStatusCodeException {
+
+		switch (req.getRequestURI()) {
+
+		case "/ExpenseReimbursementSystemJS/reimbursements/1":
+			return 1;
+
+		case "/ExpenseReimbursementSystemJS/reimbursements/2":
+			return 2;
+
+		case "/ExpenseReimbursementSystemJS/reimbursements/3":
+			return 3;
+
+		default:
+			throw new InvalidStatusCodeException(
+					"In GetReimbursementsByStatusServlet.doGet():: Invalid status code requested");
 		}
 	}
 }
