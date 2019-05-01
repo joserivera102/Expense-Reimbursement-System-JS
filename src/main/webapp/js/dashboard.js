@@ -418,8 +418,10 @@ function clearTable() {
 }
 
 /**
- * Helper function used to show a requested form when clicked.
- * @param {String} name The name of the form to show ( using id as name ).
+ * Function that uses the id of an element as the name to set the hidden attribute
+ * of that element to either show or hide that form.
+ * 
+ * @param {String} name The name of the id that belongs to the form to display.
  */
 function showForm(name) {
 
