@@ -117,7 +117,11 @@ async function loadContactUs() {
 
 function logout() {
 
-    // TODO
+    // Clear the local storage
+    localStorage.clear();
+
+    // Reload the login page
+    loadLogin();
 }
 
 /**
