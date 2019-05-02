@@ -314,8 +314,8 @@ function buildRequestTable(submission) {
         let denyBtn = document.createElement('button');
 
         // Set the class of these buttons to use bootstrap
-        approveBtn.class = 'btn btn-primary btn-sm';
-        denyBtn.class = 'btn btn-warning btn-sm';
+        approveBtn.setAttribute('class', 'btn btn-primary btn-sm');
+        denyBtn.setAttribute('class', 'btn btn-warning btn-sm');
 
         // Set the text of the buttons
         approveBtn.innerHTML = 'Approve';
@@ -333,13 +333,52 @@ function buildRequestTable(submission) {
             let response = await updateReimbursement(submission.id, 'denied');
             console.log(response);
         });
+
+        // Append the buttons
+        buttons.append(approveBtn);
+        buttons.append(denyBtn);
+
+        // Append to the row
+        trow.append(buttons);
     }
 
     // Append the entire row to the body
     tbody.append(trow);
 }
 
+/**
+ * Function to make a PUT request to the server to update the reimbursement
+ * status.
+ * 
+ * @param {String} id The id of the reimbursement to update
+ * @param {String} status The status of the reimbursement to update
+ */
 async function updateReimbursement(id, status) {
 
+    // Store our id and status in an array
+    let info = [id, status];
+
     // Perfore the PUT request to the reimbursement
+    let request = await fetch('changestatus', {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('jwt')
+        },
+        body: JSON.stringify(info)
+    });
+
+    if (request.status == 200) {
+
+        // Display the alert message
+        alertMessage(MANAGER_DASHBOARD_ALERT_ID, SUCCESS_ALERT_CLASS, 'Update Successful', false);
+        return true;
+
+    } else {
+
+        // Display the alert message
+        alertMessage(MANAGER_DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Update Failed', false);
+        return false;
+    }
 }
