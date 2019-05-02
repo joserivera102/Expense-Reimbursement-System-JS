@@ -325,13 +325,26 @@ function buildRequestTable(submission) {
         approveBtn.addEventListener('click', async function() {
 
             let response = await updateReimbursement(submission.id, 'approved');
-            console.log(response);
+
+            // Convert the new date resolved
+            response.dateResolved = timeConverter(response.dateResolved);
+
+            // Update the reimbursement details in the table
+            reimbursementDateResolved.innerHTML = response.dateResolved;
+            reimbursementStatus.innerHTML = response.reimbursementStatus.status;
         });
 
         denyBtn.addEventListener('click', async function() {
 
             let response = await updateReimbursement(submission.id, 'denied');
-            console.log(response);
+
+            // Convert the new date resolved
+            response.dateResolved = timeConverter(response.dateResolved);
+
+            // Update the reimbursement details in the table
+            reimbursementDateResolved.innerHTML = response.dateResolved;
+            reimbursementStatus.innerHTML = response.reimbursementStatus.status;
+
         });
 
         // Append the buttons
@@ -373,12 +386,11 @@ async function updateReimbursement(id, status) {
 
         // Display the alert message
         alertMessage(MANAGER_DASHBOARD_ALERT_ID, SUCCESS_ALERT_CLASS, 'Update Successful', false);
-        return true;
-
+        return request.json();
     } else {
 
         // Display the alert message
         alertMessage(MANAGER_DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Update Failed', false);
-        return false;
+        return null;
     }
 }

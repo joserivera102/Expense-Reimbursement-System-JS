@@ -2,6 +2,7 @@ package com.ers.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -75,6 +76,10 @@ public class UpdateReimbursement extends HttpServlet {
 				// Set the resolver Id
 				reimbursement.setResolverId(Integer.parseInt(principal.getId()));
 
+				// Set the resolved timestamp
+				Timestamp dateResolved = new Timestamp(System.currentTimeMillis());
+				reimbursement.setDateResolved(dateResolved);
+
 				// Attempt to update
 				Reimbursement updatedReimbursement = reimbursementService.update(reimbursement);
 
@@ -86,7 +91,7 @@ public class UpdateReimbursement extends HttpServlet {
 
 				// Request was successful, set status to 200
 				resp.setStatus(200);
-				
+
 				// Send our reimbursement object back to client
 				PrintWriter printWriter = resp.getWriter();
 				resp.setContentType("application/json");
