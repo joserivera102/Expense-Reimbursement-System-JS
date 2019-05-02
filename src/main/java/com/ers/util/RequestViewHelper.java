@@ -49,7 +49,7 @@ public class RequestViewHelper {
 				throw new UnauthenticatedAccessException(
 						"In RequestViewHelper.process():: No principal attribute found on request object");
 
-				return "partials/dashboard.html";
+			return "partials/dashboard.html";
 
 		case FILEPATH + "manager-dashboard.view":
 
@@ -62,9 +62,6 @@ public class RequestViewHelper {
 			} else
 				throw new UnauthenticatedAccessException(
 						"In RequestViewHelper.process():: User Role is unauthenticated");
-
-		case FILEPATH + "contact-us.view":
-			return "partials/contact-us.html";
 
 		default:
 			LOG.warn("In RequestViewHelper.process():: uri was " + req.getRequestURI());

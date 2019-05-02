@@ -31,7 +31,6 @@ window.onload = function() {
         }
     });
 
-    document.getElementById('to-contact-us').addEventListener('click', loadContactUs);
     document.getElementById('to-logout').addEventListener('click', logout);
 
     // Check for a JWT and role to load appropriate page
@@ -124,17 +123,6 @@ async function loadManagerDashboard() {
 
     DYNAMIC_CSS.href = 'css/dashboard.css';
     changeScript('js/manager-dashboard.js');
-}
-
-/**
- * Function that loads the contact us view from the server and
- * loads the contact us css and js scripts.
- */
-async function loadContactUs() {
-
-    APP_VIEW.innerHTML = await fetchView('contact-us.view');
-    DYNAMIC_CSS.href = 'css/contact-us.css';
-    changeScript('js/contact-us.js');
 }
 
 function logout() {
