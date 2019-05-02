@@ -49,7 +49,7 @@ public class RequestViewHelper {
 				throw new UnauthenticatedAccessException(
 						"In RequestViewHelper.process():: No principal attribute found on request object");
 
-			return "partials/dashboard.html";
+				return "partials/dashboard.html";
 
 		case FILEPATH + "manager-dashboard.view":
 

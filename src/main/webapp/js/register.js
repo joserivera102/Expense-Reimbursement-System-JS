@@ -4,10 +4,6 @@
  * 
  * @author Jose Rivera
  */
-
-// Constant variable for the alert id
-let REGISTER_ALERT_ID = "register-alert-msg";
-
 configureRegister();
 
 /**
@@ -104,6 +100,9 @@ async function registerUser() {
 
             // Save the username into local storage
             localStorage.setItem('username', request.headers.get('Username'));
+
+            // Save the role into local storage
+            localStorage.setItem('role', request.headers.get('Role'));
 
             // Navigate to dashboard
             loadDashboard();

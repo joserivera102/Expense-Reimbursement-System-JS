@@ -21,17 +21,27 @@ window.onload = function() {
     document.getElementById('to-home').addEventListener('click', loadHome);
     document.getElementById('to-login').addEventListener('click', loadLogin);
     document.getElementById('to-register').addEventListener('click', loadRegister);
-    document.getElementById('to-dashboard').addEventListener('click', loadDashboard);
+    document.getElementById('to-dashboard').addEventListener('click', function() {
+
+        // Check for a JWT and role to load appropriate page
+        if (localStorage.getItem('jwt') && localStorage.getItem('role') == 'EMPLOYEE') {
+            loadDashboard();
+        } else if (localStorage.getItem('jwt') && localStorage.getItem('role') == 'FINANCE_MANAGER') {
+            loadManagerDashboard();
+        }
+    });
+
     document.getElementById('to-contact-us').addEventListener('click', loadContactUs);
     document.getElementById('to-logout').addEventListener('click', logout);
 
     // Check for a JWT and role to load appropriate page
-    if (localStorage.getItem('jwt') && localStorage.getItem('role') == 'EMPLOYEE')
-        loadDashboard()
-    else if (localStorage.getItem('jwt') && localStorage.getItem('role') == 'FINANCE_MANAGER')
+    if (localStorage.getItem('jwt') && localStorage.getItem('role') == 'EMPLOYEE') {
+        loadDashboard();
+    } else if (localStorage.getItem('jwt') && localStorage.getItem('role') == 'FINANCE_MANAGER') {
         loadManagerDashboard();
-    else
+    } else {
         loadLogin();
+    }
 }
 
 /**
@@ -50,9 +60,15 @@ function loadHome() {
  */
 async function loadLogin() {
 
-    APP_VIEW.innerHTML = await fetchView('login.view');
-    DYNAMIC_CSS.href = 'css/login.css';
-    changeScript('js/login.js');
+    /*
+        If a jwt is present, then a user is logged in. 
+        We should not load the login page if this is the case
+     */
+    if (localStorage.getItem('jwt') == null) {
+        APP_VIEW.innerHTML = await fetchView('login.view');
+        DYNAMIC_CSS.href = 'css/login.css';
+        changeScript('js/login.js');
+    }
 }
 
 /**
@@ -61,9 +77,15 @@ async function loadLogin() {
  */
 async function loadRegister() {
 
-    APP_VIEW.innerHTML = await fetchView('register.view');
-    DYNAMIC_CSS.href = 'css/register.css';
-    changeScript('js/register.js');
+    /*
+        If a jwt is present, then a user is logged in. 
+        We should not load the register page if this is the case
+     */
+    if (localStorage.getItem('jwt') == null) {
+        APP_VIEW.innerHTML = await fetchView('register.view');
+        DYNAMIC_CSS.href = 'css/register.css';
+        changeScript('js/register.js');
+    }
 }
 
 /**

@@ -10,6 +10,12 @@ const SUCCESS_ALERT_CLASS = "alert alert-success text-center";
 const INFO_ALERT_CLASS = "alert alert-info";
 const DANGER_ALERT_CLASS = "alert alert-danger text-center";
 
+// Constant variables for alert ID's
+let LOGIN_ALERT_ID = "login-alert-msg";
+let REGISTER_ALERT_ID = "register-alert-msg";
+let DASHBOARD_ALERT_ID = "dashboard-alert-msg";
+let MANAGER_DASHBOARD_ALERT_ID = "manager-dashboard-alert-msg";
+
 /**
  * Function that takes in an array of values to check
  * for empty string values.

@@ -76,6 +76,7 @@ public class RegisterServlet extends HttpServlet {
 			resp.addHeader(JWTConfig.HEADER, JWTConfig.PREFIX + JWTGenerator.createJWT(user));
 			resp.addHeader("UserId", String.valueOf(user.getId()));
 			resp.addHeader("Username", user.getUsername());
+			resp.addHeader("Role", user.getRole().getRole());
 
 			// Send our user object back to client
 			PrintWriter printWriter = resp.getWriter();

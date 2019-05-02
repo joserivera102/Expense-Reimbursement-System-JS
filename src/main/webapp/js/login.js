@@ -4,10 +4,6 @@
  * 
  * @author Jose Rivera
  */
-
-// Constant variable for the alert id
-let LOGIN_ALERT_ID = "login-alert-msg";
-
 configureLogin();
 
 /**
@@ -23,8 +19,6 @@ function configureLogin() {
 }
 
 async function loginUser() {
-
-    console.log('in loginUser()');
 
     // Gather the fields, username and password
     let credentials = [
