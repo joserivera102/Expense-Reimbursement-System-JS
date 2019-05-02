@@ -4,10 +4,6 @@
  * 
  * @author Jose Rivera
  */
-
-// Constant variable for the alert id
-let MANAGER_DASHBOARD_ALERT_ID = "manager-dashboard-alert-msg";
-
 configureManagerDashboard();
 
 /**

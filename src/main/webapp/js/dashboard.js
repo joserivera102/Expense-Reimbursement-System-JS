@@ -3,10 +3,6 @@
  * 
  * @author Jose Rivera
  */
-
-// Constant variable for the alert id
-let DASHBOARD_ALERT_ID = "dashboard-alert-msg";
-
 configureDashboard();
 
 /**
