@@ -134,6 +134,12 @@ async function getRequestByStatus(statusId) {
 
         let response = await request.json();
 
+        // Check the status id to turn on or off the approve/deny buttons
+        if (statusId == 1) // Status PENDING, buttons should be on
+            document.getElementById('approve-deny-btn').hidden = false;
+        else
+            document.getElementById('approve-deny-btn').hidden = true;
+
         // Check to make sure we have at least one submission to display
         if (response.length > 0) {
 
@@ -228,6 +234,11 @@ function buildUsersTable(submission) {
     tbody.append(trow);
 }
 
+/**
+ * Function to dynamically build the reimbursements table.
+ * 
+ * @param {any} submission The reimbursement element
+ */
 function buildRequestTable(submission) {
 
     // Get the table body
@@ -292,6 +303,94 @@ function buildRequestTable(submission) {
     // Append to the row
     trow.append(reimbursementStatus);
 
+    // If the status is pending, create the button elements
+    if (submission.reimbursementStatus.status == 'PENDING') {
+
+        // Create the button table element
+        let buttons = document.createElement('td');
+
+        // Create the buttons
+        let approveBtn = document.createElement('button');
+        let denyBtn = document.createElement('button');
+
+        // Set the class of these buttons to use bootstrap
+        approveBtn.setAttribute('class', 'btn btn-primary btn-sm');
+        denyBtn.setAttribute('class', 'btn btn-warning btn-sm');
+
+        // Set the text of the buttons
+        approveBtn.innerHTML = 'Approve';
+        denyBtn.innerHTML = 'Deny';
+
+        // Set up event listeners for these buttons
+        approveBtn.addEventListener('click', async function() {
+
+            let response = await updateReimbursement(submission.id, 'approved');
+
+            // Convert the new date resolved
+            response.dateResolved = timeConverter(response.dateResolved);
+
+            // Update the reimbursement details in the table
+            reimbursementDateResolved.innerHTML = response.dateResolved;
+            reimbursementStatus.innerHTML = response.reimbursementStatus.status;
+        });
+
+        denyBtn.addEventListener('click', async function() {
+
+            let response = await updateReimbursement(submission.id, 'denied');
+
+            // Convert the new date resolved
+            response.dateResolved = timeConverter(response.dateResolved);
+
+            // Update the reimbursement details in the table
+            reimbursementDateResolved.innerHTML = response.dateResolved;
+            reimbursementStatus.innerHTML = response.reimbursementStatus.status;
+
+        });
+
+        // Append the buttons
+        buttons.append(approveBtn);
+        buttons.append(denyBtn);
+
+        // Append to the row
+        trow.append(buttons);
+    }
+
     // Append the entire row to the body
     tbody.append(trow);
+}
+
+/**
+ * Function to make a PUT request to the server to update the reimbursement
+ * status.
+ * 
+ * @param {String} id The id of the reimbursement to update
+ * @param {String} status The status of the reimbursement to update
+ */
+async function updateReimbursement(id, status) {
+
+    // Store our id and status in an array
+    let info = [id, status];
+
+    // Perfore the PUT request to the reimbursement
+    let request = await fetch('changestatus', {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('jwt')
+        },
+        body: JSON.stringify(info)
+    });
+
+    if (request.status == 200) {
+
+        // Display the alert message
+        alertMessage(MANAGER_DASHBOARD_ALERT_ID, SUCCESS_ALERT_CLASS, 'Update Successful', false);
+        return request.json();
+    } else {
+
+        // Display the alert message
+        alertMessage(MANAGER_DASHBOARD_ALERT_ID, DANGER_ALERT_CLASS, 'Update Failed', false);
+        return null;
+    }
 }
