@@ -73,6 +73,8 @@ public class JWTFilter extends HttpFilter {
 			 * principal
 			 */
 			req.setAttribute("principal", principal);
+			
+			LOG.info("Request authorized");
 
 		} catch (UnsupportedJwtException uje) {
 			LOG.error(uje.getMessage());
