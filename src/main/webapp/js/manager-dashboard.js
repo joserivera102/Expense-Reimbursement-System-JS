@@ -326,25 +326,30 @@ function buildRequestTable(submission) {
 
             let response = await updateReimbursement(submission.id, 'approved');
 
-            // Convert the new date resolved
-            response.dateResolved = timeConverter(response.dateResolved);
+            if (response != null) {
 
-            // Update the reimbursement details in the table
-            reimbursementDateResolved.innerHTML = response.dateResolved;
-            reimbursementStatus.innerHTML = response.reimbursementStatus.status;
+                // Convert the new date resolved
+                response.dateResolved = timeConverter(response.dateResolved);
+
+                // Update the reimbursement details in the table
+                reimbursementDateResolved.innerHTML = response.dateResolved;
+                reimbursementStatus.innerHTML = response.reimbursementStatus.status;
+            }
         });
 
         denyBtn.addEventListener('click', async function() {
 
             let response = await updateReimbursement(submission.id, 'denied');
 
-            // Convert the new date resolved
-            response.dateResolved = timeConverter(response.dateResolved);
+            if (response != null) {
 
-            // Update the reimbursement details in the table
-            reimbursementDateResolved.innerHTML = response.dateResolved;
-            reimbursementStatus.innerHTML = response.reimbursementStatus.status;
+                // Convert the new date resolved
+                response.dateResolved = timeConverter(response.dateResolved);
 
+                // Update the reimbursement details in the table
+                reimbursementDateResolved.innerHTML = response.dateResolved;
+                reimbursementStatus.innerHTML = response.reimbursementStatus.status;
+            }
         });
 
         // Append the buttons
