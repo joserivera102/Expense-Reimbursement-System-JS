@@ -1,11 +1,10 @@
 package com.ers.exceptions;
 
 /**
- * Custom exception to create an exception when a user attempts to access the
- * server without proper authentication.
+ * User defined exception to be thrown if an unauthenticated access attempt is
+ * detected.
  * 
  * @author Jose Rivera
- *
  */
 public class UnauthenticatedAccessException extends Exception {
 
@@ -14,6 +13,11 @@ public class UnauthenticatedAccessException extends Exception {
 	 */
 	private static final long serialVersionUID = -10566931042122659L;
 
+	/**
+	 * Exception constructor to create an exception.
+	 * 
+	 * @param message The message to display that is sent to the super class.
+	 */
 	public UnauthenticatedAccessException(String message) {
 		super(message);
 	}
