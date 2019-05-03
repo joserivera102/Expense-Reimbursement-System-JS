@@ -14,9 +14,8 @@ import com.ers.exceptions.UnauthenticatedAccessException;
 import com.ers.util.RequestViewHelper;
 
 /**
- * Servlet implementation class ViewServlet. This servlet will help switching
- * views for the front end requests. Will accept all requests that have '.view'
- * in the uri.
+ * View servlet will help switching views for the front end requests. Will
+ * accept all requests that have '.view' in the uri.
  * 
  * @author Jose Rivera
  */
