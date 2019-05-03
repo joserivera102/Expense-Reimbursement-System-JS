@@ -1,7 +1,7 @@
 package com.ers.models;
 
 /**
- * Class used to set up the User Role.
+ * Class used to detail the user role.
  * 
  * @author Jose Rivera
  *
