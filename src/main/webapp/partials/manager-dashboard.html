@@ -1,0 +1,64 @@
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Manager Dashboard</h1>
+        <h3 class="jumbotron-heading" id="current-user"></h3>
+        <p class="lead text-muted">Please choose from one of the following options</p>
+        <p>
+            <button class="btn btn-primary my-2" id="get-all-users-btn">Get All Users</button>
+            <button class="btn btn-primary my-2" id="pending-requests-btn">Pending Requests</button>
+            <button class="btn btn-primary my-2" id="approved-requests-btn">Approved Requests</button>
+            <button class="btn btn-primary my-2" id="denied-requests-btn">Denied Requests</button>
+        </p>
+    </div>
+</section>
+
+<section class="jumbotron-heading" id="all-users-table">
+    <div class="container">
+        <h2 class="jumbotron-heading">All Employees</h2>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody id="users-table-body">
+
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="jumbotron-heading" id="requests-table">
+    <div class="container">
+        <h2 class="jumbotron-heading" id="table-heading"></h2>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Reimbursement ID</th>
+                    <th>Author ID</th>
+                    <th>Reimbursement Type</th>
+                    <th>Reimbursement Amount</th>
+                    <th>Description</th>
+                    <th>Date Submitted</th>
+                    <th>Date Resolved</th>
+                    <th>Status</th>
+                    <th id="approve-deny-btn">Approve - Deny</th>
+                </tr>
+            </thead>
+            <tbody id="requests-table-body">
+
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+<div class="" id="manager-dashboard-alert-msg" role="alert"></div>
+<div>
+    <p class="mt-5 mb-3 text-muted">&copy; Jose 2019</p>
+</div>

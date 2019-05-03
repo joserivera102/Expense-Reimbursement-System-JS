@@ -1,0 +1,94 @@
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Employee Dashboard</h1>
+        <h3 class="jumbotron-heading" id="current-user"></h3>
+        <p class="lead text-muted">Please choose from one of the following options</p>
+        <p>
+            <button class="btn btn-primary my-2" id="create-new-request-btn">Create New Request</button>
+            <button class="btn btn-primary my-2" id="view-my-submissions-btn">View My Submissions</button>
+            <button class="btn btn-primary my-2" id="update-profile-btn">Update Profile</button>
+        </p>
+    </div>
+</section>
+
+<section class="jumbotron-heading" id="request-form">
+    <div class="container">
+        <h2 class="jumbotron-heading">Create Reimbursement Request</h2>
+
+        <form>
+            <div class="form-group">
+                <label for="reimbursement-type">Reimbursement Type</label>
+                <select class="form-control" id="reimbursement-type">
+                <option>Lodging</option>
+                <option>Travel</option>
+                <option>Food</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-inline">
+                <label for="reimbursement amount" class="mr-sm-2">
+                    Reimbursement Amount:
+                </label>
+                <span>$</span>
+                <input class="form-control mb-2 mr-sm-2" id="reimbursement-amount" type="number" min="0.01" step="1.00" max="2500">
+            </div>
+            <div class="form-group">
+                <label for="reimbursement-description">Description</label>
+                <textarea class="form-control" id="reimbursement-description" rows="4"></textarea>
+            </div>
+        </form>
+
+        <p>
+            <button class="btn btn-primary my-2" id="submit-request-btn">Submit</button>
+            <button class="btn btn-primary my-2" id="clear-form-btn">Clear Form</button>
+        </p>
+    </div>
+</section>
+
+<section class="jumbotron-heading" id="submissions-form">
+    <div class="container">
+        <h2 class="jumbotron-heading">All Submissions</h2>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Reimbursement ID</th>
+                    <th>Author ID</th>
+                    <th>Reimbursement Type</th>
+                    <th>Reimbursement Amount</th>
+                    <th>Description</th>
+                    <th>Date Submitted</th>
+                    <th>Date Resolved</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="submission-table-body">
+
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="jumbotron-heading" id="update-form">
+    <div class="container">
+        <h2 class="jumbotron-heading">Update Profile</h2>
+        <div class="register-form">
+            <label for="update-email" class="sr-only">Update Email</label>
+            <input type="text" id="update-email" class="form-control" placeholder="New Email" required autofocus>
+
+            <label for="current-password" class="sr-only">Current Password</label>
+            <input type="password" id="current-password" class="form-control" placeholder="Current Password" required>
+
+            <label for="new-password" class="sr-only">New Password</label>
+            <input type="password" id="new-password" class="form-control" placeholder="New Password" required>
+
+            <label for="confirm-password" class="sr-only">Confirm Password</label>
+            <input type="password" id="confirm-password" class="form-control" placeholder="Confirm Password" required>
+
+            <button class="btn btn-lg btn-primary btn-block" id="submit-update-btn">Update</button>
+        </div>
+</section>
+
+<div class="" id="dashboard-alert-msg" role="alert"></div>
+<div>
+    <p class="mt-5 mb-3 text-muted">&copy; Jose 2019</p>
+</div>
