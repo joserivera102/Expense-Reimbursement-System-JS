@@ -17,8 +17,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class UpdateProfileServlet. This servlet will help to
- * update the user information from the client.
+ * User servlet to accept a request to update the profile details of a user.
  * 
  * @author Jose Rivera
  */
@@ -55,6 +54,7 @@ public class UpdateProfileServlet extends HttpServlet {
 			// Attempt to get a user by the id
 			User user = userService.getById(userId);
 
+			// Check the user
 			if (user == null) {
 				LOG.warn("In UpdateProfileServlet.doPut():: UserService.getById() returned null");
 				resp.setStatus(400);
@@ -85,6 +85,7 @@ public class UpdateProfileServlet extends HttpServlet {
 			// Attempt to update the user
 			User updatedUser = userService.update(user);
 
+			// Check the updated user
 			if (updatedUser == null) {
 				LOG.warn("In UpdateProfileServlet.doPut():: UserService.update() returned null");
 				resp.setStatus(400);
@@ -111,5 +112,4 @@ public class UpdateProfileServlet extends HttpServlet {
 			resp.setStatus(500);
 		}
 	}
-
 }
