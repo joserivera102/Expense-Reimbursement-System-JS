@@ -22,9 +22,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class GetReimbursementsByStatusServlet. This servlet
- * will return all reimbursements by a requested status if the request was
- * authenticated.
+ * Reimbursement servlet to accept a request to retrieve all reimbursements by a
+ * requested status if the request was authenticated.
  * 
  * @author Jose Rivera
  *
@@ -42,7 +41,7 @@ public class GetReimbursementsByStatusServlet extends HttpServlet {
 	private ReimbursementService reimbursementService = new ReimbursementService();
 
 	/**
-	 * GET method return all reimbursements by status.
+	 * GET method return all reimbursements by status using the status id.
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -72,7 +71,7 @@ public class GetReimbursementsByStatusServlet extends HttpServlet {
 				// Request was successful, set status to 200
 				resp.setStatus(200);
 
-				// Send our List object back to client
+				// Get the print writer to write the List back to client
 				PrintWriter printWriter = resp.getWriter();
 				resp.setContentType("application/json");
 
