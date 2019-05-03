@@ -35,6 +35,7 @@ public class UserService {
 	 * 
 	 * @param username The username passed in.
 	 * @param password The password passed in.
+	 * 
 	 * @return A valid user by the passed in credentials, or null if none found.
 	 */
 	public User getByCredentials(String username, String password) {
@@ -52,6 +53,7 @@ public class UserService {
 	 * will log a warning and return null.
 	 * 
 	 * @param id The id of the user to find.
+	 * 
 	 * @return A valid user or null if none found.
 	 */
 	public User getById(int id) {
@@ -69,6 +71,7 @@ public class UserService {
 	 * warning and return null.
 	 * 
 	 * @param user A user to add to the database.
+	 * 
 	 * @return The newly added user.
 	 */
 	public User addUser(User user) {
@@ -86,6 +89,7 @@ public class UserService {
 	 * warning and return null.
 	 * 
 	 * @param updatedUser The updated user to update.
+	 * 
 	 * @return The newly updated user.
 	 */
 	public User update(User updatedUser) {
@@ -103,6 +107,7 @@ public class UserService {
 	 * zero, will log a warning and return false.
 	 * 
 	 * @param id The id of the user to delete.
+	 * 
 	 * @return True if the user was deleted, false if not.
 	 */
 	public boolean delete(int id) {
