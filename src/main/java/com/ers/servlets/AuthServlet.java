@@ -20,8 +20,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class AuthServlet. This servlet will help to
- * authenticate a user.
+ * Servlet class that is used to authenticate a user. Accepts user credentials
+ * and attempts to retrieve a user from the database.
  * 
  * @author Jose Rivera
  */
@@ -39,10 +39,8 @@ public class AuthServlet extends HttpServlet {
 
 	/**
 	 * POST method to authenticate a login request. Takes the user name and password
-	 * from the client and validates and returns a user if found.
-	 * 
-	 * Writes a valid user back in JSON format or returns a status code of 400 for
-	 * failure
+	 * from the client and validates and returns a user if found. Writes a valid
+	 * user back in JSON format.
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -52,12 +50,15 @@ public class AuthServlet extends HttpServlet {
 			// Get the object mapper
 			ObjectMapper objectMapper = new ObjectMapper();
 
+			// Retrieve the credentials
 			String[] credentials = objectMapper.readValue(req.getInputStream(), String[].class);
 
-			// Our credentials array should only contain two values
+			/*
+			 * Our credentials array should only contain two values, the username and
+			 * password.
+			 */
 			if (credentials.length != 2) {
-				LOG.warn(
-						"In AuthServlet.doPost():: Credentials array did not have the necessary values or to many values");
+				LOG.warn("In AuthServlet.doPost():: Credentials array was invalid");
 				resp.setStatus(401);
 				return;
 			}
@@ -65,8 +66,9 @@ public class AuthServlet extends HttpServlet {
 			// Attempt to get a user by the credentials
 			User user = userService.getByCredentials(credentials[0], credentials[1]);
 
+			// Check our returned user
 			if (user == null) {
-				LOG.warn("In AuthServlet.doPost():: UserService.getByCredentials() return " + user);
+				LOG.warn("In AuthServlet.doPost():: UserService.getByCredentials() return null");
 				resp.setStatus(400);
 				return;
 			}
@@ -77,10 +79,10 @@ public class AuthServlet extends HttpServlet {
 			resp.addHeader("Username", user.getUsername());
 			resp.addHeader("Role", user.getRole().getRole());
 
-			// login was successful, set status to 200
+			// Login was successful, set status to 200
 			resp.setStatus(200);
 
-			// Send our user object back to client
+			// Get the print writer to write the user back to client
 			PrintWriter printWriter = resp.getWriter();
 			resp.setContentType("application/json");
 
