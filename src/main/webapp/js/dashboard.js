@@ -1,5 +1,6 @@
 /**
  * dashboard.js file used to configure the Dashboard for an employee.
+ * Will be used to display the employee options and perform functions.
  * 
  * @author Jose Rivera
  */
@@ -43,6 +44,10 @@ function configureDashboard() {
     document.getElementById('submit-update-btn').addEventListener('click', updateProfile);
 }
 
+/**
+ * Function to make a POST request to the server to
+ * submit a reimbursement request.
+ */
 async function submitRequest() {
 
     // Variable for the type id of the reimbursement
@@ -226,7 +231,6 @@ async function updateProfile() {
         }
     }
 
-
     // If the password field has a value, then the other fields must have values
     if (document.getElementById('current-password').value != '') {
 
@@ -306,17 +310,6 @@ async function updateProfile() {
 }
 
 /**
- * Function to clear the fields in the update form.
- */
-function clearUpdateForm() {
-
-    document.getElementById('update-email').value = '';
-    document.getElementById('current-password').value = '';
-    document.getElementById('new-password').value = '';
-    document.getElementById('confirm-password').value = '';
-}
-
-/**
  * Function to dynamically create the table elements using
  * the response object for submissions.
  * 
@@ -388,6 +381,17 @@ function buildTable(submission) {
 
     // Append the entire row to the body
     tbody.append(trow);
+}
+
+/**
+ * Function to clear the fields in the update form.
+ */
+function clearUpdateForm() {
+
+    document.getElementById('update-email').value = '';
+    document.getElementById('current-password').value = '';
+    document.getElementById('new-password').value = '';
+    document.getElementById('confirm-password').value = '';
 }
 
 /**
