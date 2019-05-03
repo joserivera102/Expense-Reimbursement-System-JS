@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class UpdateReimbursement. This servlet will update
- * the reimbursement status by an authenticated user.
+ * Reimbursement servlet to accept a request to update the status of a
+ * reimbursement from an authenticated user.
  * 
  * @author Jose Rivera
  */
@@ -83,6 +83,7 @@ public class UpdateReimbursement extends HttpServlet {
 				// Attempt to update
 				Reimbursement updatedReimbursement = reimbursementService.update(reimbursement);
 
+				// Check the updated reimbursement
 				if (updatedReimbursement == null) {
 					LOG.error("In UpdateReimbursement.doPut():: Unable to update reimbursement status");
 					resp.setStatus(400);
@@ -92,11 +93,11 @@ public class UpdateReimbursement extends HttpServlet {
 				// Request was successful, set status to 200
 				resp.setStatus(200);
 
-				// Send our reimbursement object back to client
+				// Get the print writer to write the reimbursement back to client
 				PrintWriter printWriter = resp.getWriter();
 				resp.setContentType("application/json");
 
-				// Write our user back as JSON
+				// Write the reimbursement back as JSON
 				String reimbursementJson = objectMapper.writeValueAsString(updatedReimbursement);
 				printWriter.write(reimbursementJson);
 
