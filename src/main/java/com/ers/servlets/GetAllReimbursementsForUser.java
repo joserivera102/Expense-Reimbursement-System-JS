@@ -21,8 +21,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class GetAllReimbursementsForUser. This servlet will
- * help to retrieve all reimbursements for a user.
+ * Reimbursement Servlet to accept a request to retrieve all reimbursements for
+ * a specified user.
  * 
  * @author Jose Rivera
  */
@@ -41,7 +41,6 @@ public class GetAllReimbursementsForUser extends HttpServlet {
 	private UserService userService = new UserService();
 
 	/**
-	 * 
 	 * POST method to accept a user ID in order to create a list of reimbursements
 	 * for that user.
 	 */
@@ -59,7 +58,7 @@ public class GetAllReimbursementsForUser extends HttpServlet {
 			// Use the id to get the user
 			User user = userService.getById(userId);
 
-			// Check our user to make sure it is valid
+			// Check our user
 			if (user == null) {
 				LOG.warn("In GetAllReimbursementsForUser.doPost():: User was null");
 				resp.setStatus(400);
@@ -72,10 +71,11 @@ public class GetAllReimbursementsForUser extends HttpServlet {
 			// Everything was successful, set the status to OK
 			resp.setStatus(200);
 
-			// Send our list back to client
+			// Get the print writer to write the list back to client
 			PrintWriter printWriter = resp.getWriter();
 			resp.setContentType("application/json");
 
+			// Write the list back as JSON
 			String reimbursementList = objectMapper.writeValueAsString(reimbursements);
 			printWriter.write(reimbursementList);
 
