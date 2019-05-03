@@ -18,8 +18,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class SubmitReimbursementServlet. This servlet will
- * help to submit a reimbursement to the database.
+ * Reimbursement servlet to accept a request to persist a reimbursement to the
+ * database.
  * 
  * @author Jose Rivera
  */
@@ -71,7 +71,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
 			// Our reimbursement was successfully added
 			resp.setStatus(200);
 
-			// Send our user object back to client
+			// Get the print writer to write the reimbursement back to client
 			PrintWriter printWriter = resp.getWriter();
 			resp.setContentType("application/json");
 
