@@ -20,8 +20,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class RegisterUserServlet. This servlet will help to
- * register a user.
+ * User servlet to register a new user to the database.
  * 
  * @author Jose Rivera
  */
@@ -53,9 +52,9 @@ public class RegisterServlet extends HttpServlet {
 			// Create our user based off the information from the request
 			User newUser = objectMapper.readValue(req.getInputStream(), User.class);
 
-			// If our user was null, return a status of 400
+			// Check the user object created
 			if (newUser == null) {
-				LOG.warn("In RegisterUserServlet.doPost()::User retrieved from request was " + newUser);
+				LOG.warn("In RegisterUserServlet.doPost()::User retrieved from request was null");
 				resp.setStatus(400);
 				return;
 			}
@@ -63,22 +62,23 @@ public class RegisterServlet extends HttpServlet {
 			// Pass our user to the user service to persist it to the database.
 			User user = userService.addUser(newUser);
 
+			// Check the newly added user
 			if (user == null) {
-				LOG.warn("In RegisterUserServlet.doPost()::User returned from User Service was " + user);
+				LOG.warn("In RegisterUserServlet.doPost()::User returned from User Service was null");
 				resp.setStatus(400);
 				return;
 			}
 
 			// Our user was successfully added
 			resp.setStatus(200);
-			
+
 			// Add appropriate headers for the user
 			resp.addHeader(JWTConfig.HEADER, JWTConfig.PREFIX + JWTGenerator.createJWT(user));
 			resp.addHeader("UserId", String.valueOf(user.getId()));
 			resp.addHeader("Username", user.getUsername());
 			resp.addHeader("Role", user.getRole().getRole());
 
-			// Send our user object back to client
+			// Get the print writer to write the user back to client
 			PrintWriter printWriter = resp.getWriter();
 			resp.setContentType("application/json");
 
