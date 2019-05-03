@@ -108,7 +108,7 @@ async function loadDashboard() {
 
 /**
  * Function that loads the manager dashboard view from the server and
- * loads the dashboard css and js scripts.
+ * loads the manager dashboard css and js scripts.
  */
 async function loadManagerDashboard() {
 
@@ -125,6 +125,10 @@ async function loadManagerDashboard() {
     changeScript('js/manager-dashboard.js');
 }
 
+/**
+ * Function to clear the local storage and logout a user.
+ * Loads the login page to allow re logging in.
+ */
 function logout() {
 
     // Clear the local storage
