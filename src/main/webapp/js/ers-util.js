@@ -138,7 +138,6 @@ function timeConverter(timestamp) {
     return dateSubmitted;
 }
 
-
 /**
  * Function to clear a table and get it ready for new values.
  * 
