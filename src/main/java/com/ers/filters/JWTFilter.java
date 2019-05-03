@@ -18,6 +18,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.UnsupportedJwtException;
 
+/**
+ * JWT Filter that will intercept all Http requests and responses coming through
+ * the server. Will check for a valid JWT before forwarding the request down the
+ * filter chain.
+ * 
+ * @author Jose Rivera
+ *
+ */
 @WebFilter("/*")
 public class JWTFilter extends HttpFilter {
 
@@ -73,7 +81,7 @@ public class JWTFilter extends HttpFilter {
 			 * principal
 			 */
 			req.setAttribute("principal", principal);
-			
+
 			LOG.info("Request authorized");
 
 		} catch (UnsupportedJwtException uje) {

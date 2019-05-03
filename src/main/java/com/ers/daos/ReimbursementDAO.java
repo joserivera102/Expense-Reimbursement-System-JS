@@ -81,6 +81,14 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 		return reimbursements;
 	}
 
+	/**
+	 * Method to retrieve a list of reimbursements by a specified user.
+	 * 
+	 * @param user The user that the reimbursements belong to.
+	 * 
+	 * @return A list of reimbursements. Can return an empty list if no
+	 *         reimbursements are available.
+	 */
 	public List<Reimbursement> getByUser(User user) {
 
 		// Create an empty list
@@ -136,6 +144,15 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 		return reimbursements;
 	}
 
+	/**
+	 * Method to retrieve a list of reimbursements by a specified status.
+	 * 
+	 * @param statusId The status id to look for in the lookup table in the
+	 *                 database.
+	 * 
+	 * @return A list of reimbursements. Can return an empty list if no
+	 *         reimbursements are available.
+	 */
 	public List<Reimbursement> getByStatus(int statusId) {
 
 		// Create an empty list
@@ -382,5 +399,4 @@ public class ReimbursementDAO implements DAO<Reimbursement> {
 		// Return false if the reimbursement was not deleted properly
 		return false;
 	}
-
 }

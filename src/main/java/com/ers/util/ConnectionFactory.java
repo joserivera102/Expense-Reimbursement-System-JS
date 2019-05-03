@@ -63,8 +63,10 @@ public class ConnectionFactory {
 			// Manually register the driver for Tomcat to recognize
 			DriverManager.registerDriver(new OracleDriver());
 
-			// Load the properties file ( keys and values) into the properties object
-			// Requires full file path, needs to be looked into later...
+			/*
+			 * Load the properties file ( keys and values) into the properties object
+			 * Requires full file path, needs to be looked into later...
+			 */
 			prop.load(new FileReader(
 					"D:\\Repositories\\Expense-Reimbursement-System-JS\\src\\main\\resources\\application.properties"));
 
@@ -84,7 +86,7 @@ public class ConnectionFactory {
 
 		// Check our connection
 		if (conn == null)
-			LOG.warn("In ConnectionFactory.getConnection():: Connection was " + conn);
+			LOG.warn("In ConnectionFactory.getConnection():: Connection was null");
 
 		// Return the connection
 		return conn;

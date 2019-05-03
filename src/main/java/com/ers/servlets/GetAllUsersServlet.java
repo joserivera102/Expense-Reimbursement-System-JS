@@ -21,8 +21,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class GetAllUsersServlet. This servlet will return all
- * users if request was made by an authorized user.
+ * Users servlet to accept a request to retrieve all users if the request is
+ * authenticated.
  * 
  * @author Jose Rivera
  *
@@ -67,7 +67,7 @@ public class GetAllUsersServlet extends HttpServlet {
 				// Request was successful, set status to 200
 				resp.setStatus(200);
 
-				// Send our List object back to client
+				// Get the print writer to write the list back to client
 				PrintWriter printWriter = resp.getWriter();
 				resp.setContentType("application/json");
 

@@ -116,6 +116,7 @@ public class ReimbursementService {
 	 * equal to zero, will log a warning and return false.
 	 * 
 	 * @param id The id of the reimbursement to delete.
+	 * 
 	 * @return True if the reimbursement was deleted, false if not.
 	 */
 	public boolean delete(int id) {

@@ -1,3 +1,10 @@
+/**
+ * Script used to generate the tables and constraints for
+ * the Expense Reimbursement System project.
+ * 
+ * @author Jose Rivera
+ */
+
 ALTER TABLE
 	ERS_USERS DROP
 		CONSTRAINT USER_ROLES_FK;

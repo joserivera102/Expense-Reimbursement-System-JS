@@ -72,6 +72,14 @@ public class UserDAO implements DAO<User> {
 		return users;
 	}
 
+	/**
+	 * Method to query the database and return a user by given credentials.
+	 * 
+	 * @param username The username of the user to look up.
+	 * @param password The password of the user to look up.
+	 * 
+	 * @return A valid user, or null if no user is found.
+	 */
 	public User getByCredentials(String username, String password) {
 
 		// Create a user
