@@ -18,6 +18,10 @@ function configureLogin() {
     document.getElementById('submit-creds').addEventListener('click', loginUser);
 }
 
+/**
+ * Function to make a POST request to authenticate and login
+ * a user based on passed in credentials.
+ */
 async function loginUser() {
 
     // Gather the fields, username and password
