@@ -7,10 +7,12 @@ Employees must select the type of reimbursement as: LODGING, TRAVEL, FOOD, or OT
 # Technical Features
 - The application employs the DAO design pattern, and properly separates code into the appropriate layers
 - The back-end system uses JDBC to connect to an Oracle 12c EE database through Amazon Web Services Relational Database
-- The application deploys onto Tomcat Server (v9.0)
+- The application deploys onto Tomcat Server ( v9.0 )
 - The middle tier uses Servlet technology for dynamic Web application development through the Servlet API
 - The front-end view uses JavaScript to mimic a single page application that uses AJAX to call server-side components
 - The back-end system uses Log4J to log errors and any information into a log file
+- Authentication is handled through the use of Json Web Tokens ( JWT's )
+- A list of dependencies used can be found in the pom.xml file
 
 # Important!
 - Connecting to an Amazon Web Service hosted RDS, the application requires an app.properties file to be created in the src/main/resources path. With this file, you will need to detail the driver, driver type with RDS endpoint provided by AWS, the username and password to the database
